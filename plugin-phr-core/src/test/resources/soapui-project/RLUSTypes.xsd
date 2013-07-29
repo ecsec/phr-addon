@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    xmlns:RLUStypes="http://www.omg.org/spec/RLUS/201012/RLUStypes" 
+	xmlns:RLUSexp="http://www.omg.org/spec/RLUS/201012/RLUSexpression" 
+	xmlns="http://www.omg.org/spec/RLUS/201012/RLUStypes" 
+	xmlns:datatypes="urn:hl7-org:v3" 
+	targetNamespace="http://www.omg.org/spec/RLUS/201012/RLUStypes" elementFormDefault="qualified">
+	<xs:import namespace="http://www.omg.org/spec/RLUS/201012/RLUSexpression" schemaLocation="RLUSExpression.xsd"/>
+	<xs:import namespace="urn:hl7-org:v3" schemaLocation="CDA.xsd"/>
+	<xs:element name="errorCode" type="RLUStypes:errorCode"/>
+	<xs:element name="RLUSStatusCode" type="RLUStypes:RLUSStatusCode"/>
+	<xs:complexType name="errorCode">
+		<xs:sequence>
+			<xs:element name="success" type="xs:boolean" nillable="false"/>
+			<xs:element name="message" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RLUSStatusCode">
+		<xs:complexContent>
+			<xs:extension base="RLUStypes:errorCode">
+				<xs:sequence>
+					<xs:element name="recordID" type="datatypes:II" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- the search types -->
+	<xs:element name="RLUSSearchStruct">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="RLUStypes:RLUSSearchStructType">
+					<xs:attribute name="semantic-signifiername" type="xs:string" use="optional"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="RLUSSearchStructType">
+		<xs:choice>
+			<xs:element name="searchByCriteria">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="FilterCriteria" type="RLUStypes:FilterCriteriaType" minOccurs="0"/>
+						<xs:element name="OrderCriteria" type="RLUStypes:OrderCriteriaType" minOccurs="0"/>
+						<xs:element name="SearchAttributes" type="RLUStypes:SearchAttributesType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="searchByExample" type="xs:anyType"/>
+		</xs:choice>
+	</xs:complexType>
+	<!-- field elements -->
+	<xs:complexType name="FieldType">
+		<xs:attribute name="name" type="xs:string" use="required"/>
+		<xs:attribute name="qualifier" type="xs:string" use="optional"/>
+	</xs:complexType>
+	<!-- order elements -->
+	<xs:complexType name="OrderType">
+		<xs:attribute name="name" type="xs:string" use="required"/>
+		<xs:attribute name="direction" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="ASC"/>
+					<xs:enumeration value="DESC"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<!-- the type of search fields -->
+	<xs:complexType name="SearchAttributesType">
+		<xs:sequence>
+			<xs:element name="Field" type="RLUStypes:FieldType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- the type of filtering criteria -->
+	<xs:complexType name="FilterCriteriaType">
+		<xs:sequence>
+			<xs:element name="Expression" type="RLUSexp:ExpressionType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- the type of ordering criteria -->
+	<xs:complexType name="OrderCriteriaType">
+		<xs:sequence>
+			<xs:element name="Order" type="RLUStypes:OrderType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- TODO Place minOccurs and maxOccurs attributes when cardinality is clear -->
+	<!-- TODO Add restrictions to xs:string, xs:int and other simple types when requirements are clear -->
+	<xs:element name="RLUSsemantic-signifier">
+		<xs:annotation>
+			<xs:documentation>
+                The semantic-signifier signifier is a meta-data schema used to describe the structural and semantic definition of
+                the semantic-signifier. It describes the core XSD of the semantic-signifier type, along with other necessary descriptions
+                to fully define the semantic behavior of the semantic-signifier.
+
+                The name, signifierID and version elements contain semantic-signifier type name (e.g. Patient or Service
+                Provider), semantic-signifier type ID (some GUID or alphanumeric id) and version of the semantic-signifier signifier
+                respectively.
+
+                The semantic-signifierSchema is a sequence of hierarchical schemas and constraint actions. Each segment includes
+                SchemaName, SchemaDefinition, SchemaRendering, SchemaConstraintsDefinition and in some cases Additional
+                nested schema segments (such as: POCD_MO040, etc).
+            </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<!-- semantic-signifierID -->
+				<xs:element name="name" type="xs:string"/>
+				<xs:element name="signifierID" type="xs:string"/>
+				<xs:element name="version" type="xs:string"/>
+				<!-- semantic-signifierSchema description -->
+				<xs:element name="schemaDefName" type="xs:string"/>
+				<xs:element name="schemaDefintionReference" type="xs:anyURI"/>
+				<xs:element name="renderingDefintionReference" type="xs:anyURI" minOccurs="0"/>
+				<xs:element name="rulesetDefintionReference" type="xs:anyURI" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RLUSInitializeRequestSrcStruct" type="RLUStypes:RLUSInitializeRequestSrcStruct"/>
+	<xs:complexType name="RLUSInitializeRequestSrcStruct">
+		<xs:sequence>
+			<xs:element name="RLUSsemantic-signifierName" type="xs:string"/>
+			<xs:element name="SecurityContext">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="SourceIdentity" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:attribute name="identityName" type="xs:string"/>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="InitializeContext" type="xs:string"/>
+			<xs:element name="CBRContext">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="CBRName" type="xs:string"/>
+						<xs:element name="NetworkName" type="xs:string"/>
+						<xs:element name="NetworkAddress" type="xs:NMTOKEN"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="RLUSPutRequestSrcStruct" type="RLUStypes:RLUSPutRequestSrcStruct"/>
+	<xs:complexType name="RLUSPutRequestSrcStruct">
+		<xs:sequence>
+			<xs:element name="RLUSsemantic-signifierName" type="xs:string"/>
+			<xs:element name="SecurityContext">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="SourceIdentity" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:attribute name="identityName" type="xs:string"/>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="CBRContext">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="CBRName" type="xs:string"/>
+						<xs:element name="NetworkName" type="xs:string"/>
+						<xs:element name="NetworkAddress" type="xs:NMTOKEN"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="RLUSsemantic-signifierRecordLocationStruct" type="RLUStypes:RLUSsemantic-signifierRecordLocationStruct"/>
+	<xs:complexType name="RLUSsemantic-signifierRecordLocationStruct">
+		<xs:sequence>
+			<xs:element name="RLUSsemantic-signifierName" type="xs:string"/>
+			<xs:element name="semantic-signifierRecordID" type="datatypes:II"/>
+			<xs:element name="CBRContext">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="CBRName" type="xs:string"/>
+						<xs:element name="NetworkName" type="xs:string"/>
+						<xs:element name="NetworkAddress" type="xs:NMTOKEN"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

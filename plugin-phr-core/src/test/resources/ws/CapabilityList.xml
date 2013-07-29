@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CapabilityList Id="uuid-00253570-2d35-11e0-91fa-0800200c9a66" xmlns="fue-epa:capabilitylist" xmlns:rlus="http://www.omg.org/spec/RLUS/201012/RLUSGeneric" xmlns:rlustypes="http://www.omg.org/spec/RLUS/201012/RLUStypes" xmlns:exp="http://www.omg.org/spec/RLUS/201012/RLUSexpression">
+    <AddressInformation>
+        <wsa:EndpointReference xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/02/addressing/wsdl" xmlns:epa="http://isst.fhg.de/epa">
+            <wsa:Address>http://isst.fhg.de/epa/records</wsa:Address>
+            <wsa:ReferenceParameters>
+                <epa:AktenID>123456789</epa:AktenID>
+            </wsa:ReferenceParameters>
+        </wsa:EndpointReference>
+    </AddressInformation>
+    <SupportedKeys>
+        <KeyBinding Id="uuid-1b3ba2b0-2d33-11e0-91fa-0800200c9a66" xmlns="http://www.w3.org/2002/03/xkms#">
+            <Status StatusValue="http://www.w3.org/2002/03/xkms#Valid"/>
+            <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+                <ds:KeyValue>
+                    <ds:RSAKeyValue>
+                        <ds:Modulus>0nIsmR+aVW2egl5MIfOKy4HuMKkk9AZ/IQuDLVPlhzOfgngjVQCjr8uvmnqtNu8HBupui8LgGthO6U9D0CNT5mbmhIAErRADUMIAFsi7LzBarUvNWTqYNEJmcHsAUZdrdcDrkNnG7SzbuJx+GDNiHKVDQggPBLc1XagW20RMvok=</ds:Modulus>
+                        <ds:Exponent>AQAB</ds:Exponent>
+                    </ds:RSAKeyValue>
+                </ds:KeyValue>
+            </ds:KeyInfo>
+            <KeyUsage>http://www.w3.org/2002/03/xkms#Encryption</KeyUsage>
+        </KeyBinding>
+    </SupportedKeys>
+    <SupportedCommunicationPatterns>                    
+        <SupportedCommunicationPattern Type="fue-epa:patterns:km02"/>
+        <SupportedCommunicationPattern Type="fue-epa:patterns:km03"/>
+        <SupportedCommunicationPattern Type="fue-epa:patterns:km05"/>
+        <SupportedCommunicationPattern Type="fue-epa:patterns:km06"/>
+    </SupportedCommunicationPatterns>
+    <SupportedSemanticSignifiers>
+        <rlustypes:RLUSsemantic-signifier>
+            <rlustypes:name>MedicationSummary</rlustypes:name>
+            <rlustypes:signifierID>MSU</rlustypes:signifierID>
+            <rlustypes:version>1.0</rlustypes:version>
+            <rlustypes:schemaDefName>MSUSSD</rlustypes:schemaDefName>
+            <rlustypes:schemaDefintionReference>MedicationSummarySemanticSignifierDefinition.xsd</rlustypes:schemaDefintionReference>
+        </rlustypes:RLUSsemantic-signifier>                 
+    </SupportedSemanticSignifiers>
+</CapabilityList>

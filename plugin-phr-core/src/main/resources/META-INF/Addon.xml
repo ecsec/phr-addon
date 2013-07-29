@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AddonBundleDescription>
+  <ID>PHR</ID>
+  <Version>1.0</Version>
+  <About/>
+  <License/>
+  <LocalizedName xml:lang="DE">Plugin für die elektronische Patientenakte</LocalizedName>
+  <LocalizedDescription xml:lang="DE">Testbeschreibung</LocalizedDescription>
+  <Logo/>
+  <ConfigDescription/>
+  <BindingActions>
+    <AppPluginActionDescription>
+      <ClassName>org.openecard.plugins.phrplugin.PHRPluginAction</ClassName>
+      <LocalizedName xml:lang="DE">TODO</LocalizedName>
+      <LocalizedDescription xml:lang="DE">TODO</LocalizedDescription>
+      <ResourceName>phr-Client</ResourceName>
+      <ConfigDescription/>
+    </AppPluginActionDescription>
+  </BindingActions>
+  <ApplicationActions/>
+  <IFDActions/>
+  <SALActions/>
+</AddonBundleDescription>

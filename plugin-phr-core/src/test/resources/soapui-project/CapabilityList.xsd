@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="fue-epa:capabilitylist" xmlns:tns="fue-epa:capabilitylist" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xkms="http://www.w3.org/2002/03/xkms#" xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:epa="http://isst.fhg.de/epa" xmlns:rlus="urn:RLUStypes.hssp.com" targetNamespace="fue-epa:capabilitylist" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd"/>
+	<xs:import namespace="http://www.w3.org/2002/03/xkms#" schemaLocation="xkms.xsd"/>
+	<xs:import namespace="http://www.w3.org/2005/08/addressing" schemaLocation="ws-addr.xsd"/>
+	<xs:import namespace="urn:RLUStypes.hssp.com" schemaLocation="RLUSTypes.xsd"/>
+	<xs:element name="CapabilityList" type="tns:CapabilityList">
+		<xs:annotation>
+			<xs:documentation>CapabilityList Root</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="CapabilityList">
+		<xs:sequence>
+			<xs:element name="AddressInformation" type="tns:AddressInformation"/>
+			<xs:element name="SupportedKeys" type="tns:SupportedKeys"/>
+			<xs:element name="SupportedCommunicationPatterns" type="tns:SupportedCommunicationPatterns"/>
+			<xs:element name="SupportedSemanticSignifiers" type="tns:SupportedSemanticSignifiers"/>
+			<xs:element ref="ds:Signature" minOccurs="2" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="Id" type="xs:ID" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="AddressInformation">
+		<xs:sequence>
+			<xs:element ref="wsa:EndpointReference"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SupportedKeys">
+		<xs:sequence>
+			<xs:element ref="xkms:KeyBinding" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SupportedCommunicationPatterns">
+		<xs:sequence>
+			<xs:element name="SupportedCommunicationPattern" type="tns:SupportedCommunicationPattern" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SupportedCommunicationPattern">
+		<xs:attribute name="Type" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="SupportedSemanticSignifiers">
+		<xs:sequence>
+			<xs:element ref="rlus:RLUSSemanticSignifier" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

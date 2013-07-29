@@ -1,0 +1,1233 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ClinicalDocument xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 CDASchema/CDA_extended.xsd" classCode="DOCCLIN" moodCode="EVN">
+	<!--HL7 CDAr2 -->
+	<typeId extension="POCD_HD000040" root="2.16.840.1.113883.1.3"/>
+	<!--Medical Document Specification -->
+	<templateId root="1.3.6.1.4.1.19376.1.5.3.1.1.1"/>
+	<!--CDAr2 Interoperability level 3 -->
+	<templateId root="2.16.840.1.113883.10.20.30"/>
+	<!--ePA Medication Summary document template -->
+	<templateId root="1.2.3.4.5.6.7.8.9"/>
+	<!--Document Id -->
+	<id root="bd8a953a-761d-4136-95fc-5146223ef060"/>
+	<code code="56445-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Medication Summary"/>
+	<!--Document title -->
+	<title>ePA Medikationsplan</title>
+	<!--Document creation time -->
+	<effectiveTime value="201203274914+0100"/>
+	<confidentialityCode code="N" codeSystem="2.16.840.1.113883.5.25" codeSystemName="Confidentiality" displayName="Normal"/>
+	<!--Document Language Code -->
+	<languageCode code="de-DE"/>
+	<!--Patient information -->
+	<recordTarget contextControlCode="OP" typeCode="RCT">
+		<patientRole classCode="PAT">
+			<!--Primary patient identifier : unveraenderlicher Teil der eGK-KVNR) -->
+			<id extension="X110122773" root="1.2.276.0.76.4.8"/>
+			<patient classCode="PSN" determinerCode="INSTANCE">
+				<!--Patient's name -->
+				<name>
+					<given>Annemarie</given>
+					<family>Schühmann</family>
+				</name>
+				<!--Geschlecht -->
+				<administrativeGenderCode code="W" codeSystem="2.16.840.1.113883.5.1" codeSystemName="AdministrativeGender" displayName="weiblich"/>
+				<!--Geburtstag -->
+				<birthTime value="19290604"/>
+			</patient>
+		</patientRole>
+	</recordTarget>
+	<!--Author Information -->
+	<author contextControlCode="OP" typeCode="AUT">
+		<!--HCP profession (epSOSHealthcareProfessionalRoles - 1.3.6.1.4.1.12559.11.10.1.3.1.42.1) -->
+		<!--Berufskodierung nach ISCO-08 / Deutsche Fassung ist momentan in Abstimmung; Draft existiert bereits -->
+		<functionCode code="2212" codeSystem="2.16.840.1.113883.2.9.6.2.7" codeSystemName="ISCO-08" displayName="Allgemeinmediziner"/>
+		<time value="20110405094914"/>
+		<assignedAuthor classCode="ASSIGNED">
+			<!--HCP's Identification number -->
+			<!-- Bsp.-Id aus der ePA-Sicherheitsarchitektur Anhang C -->
+			<id extension="1-1x25sd-d 5dd" root="1.3.6.1.4.1.778.51.624.112.1"/>
+			<!--HCP's Speciality -->
+			<!-- Hier wird momentan das französiche CodeSystem verwendet -->
+			<!-- <code code="G15_10/R01_SM26" codeSystem="1.2.250.1.213.1.1.4.5" codeSystemName="RPPS" displayName="Allgemeinmediziner"/> -->
+			<!--HCP's name -->
+			<assignedPerson>
+				<name>
+					<given>Thea</given>
+					<family>Muster00401</family>
+					<prefix>Dr. med.</prefix>
+				</name>
+			</assignedPerson>
+			<!--Healthcare Facility -->
+			<!--<representedOrganization></representedOrganization> -->
+		</assignedAuthor>
+	</author>
+	<!-- Hier wird die Organisation eingetragen, die das Dokument verwaltet oder auch ändert. Da aber keine zentrale Institution in Deutschland existiert, die diese Funktion erfüllt, ist dieser Eintrag für die Bundesrepublik Deutschland nicht notwendig. Dieses Element muss trotzdem gefüllt werden, weil der CDA-Standard in den USA entwickelt wurde, wo solche Institutionen existieren.  -->
+	<custodian typeCode="CST">
+		<assignedCustodian classCode="ASSIGNED">
+			<representedCustodianOrganization classCode="ORG" determinerCode="INSTANCE">
+				<!-- Bsp.-Id aus der ePA-Sicherheitsarchitektur Anhang C -->
+				<id extension="1-1x25sd-dsds" root="1.3.6.1.4.1.778.51.624.112.5"/>
+			</representedCustodianOrganization>
+		</assignedCustodian>
+	</custodian>
+	<legalAuthenticator typeCode="LA" contextControlCode="OP">
+		<time value="20110405094914"/>
+		<signatureCode code="S"/>
+		<assignedEntity classCode="ASSIGNED">
+			<!-- Bsp.-Id aus der ePA-Sicherheitsarchitektur Anhang C -->
+			<id extension="1-1x25sd-d 5dd" root="1.3.6.1.4.1.778.51.624.112.1"/>
+			<!-- Hier wird momentan das französiche CodeSystem verwendet -->
+			<!-- <code code="G15_10/R01_SM26" codeSystem="1.2.250.1.213.1.1.4.5" codeSystemName="RPPS" displayName="Allgemeinmediziner"/> -->
+			<!--HCP's name -->
+			<assignedPerson>
+				<name>
+					<given>Thea</given>
+					<family>Muster00401</family>
+					<prefix>Dr. med.</prefix>
+				</name>
+			</assignedPerson>
+			<!--Healthcare Facility -->
+			<!--<representedOrganization></representedOrganization> -->
+		</assignedEntity>
+	</legalAuthenticator>
+	<!--Dokumentenzweck -->
+	<!--<documentationOf> <serviceEvent classCode="ACT"> Document identification 
+    (epSOSDocumentCode - 1.3.6.1.4.1.12559.11.10.1.3.1.42.32) <code code="RELMAD572" 
+    codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Synth?se 
+    m?dicale epSOS"/> <effectiveTime> <high value="20080929094914"/> </effectiveTime> 
+    </serviceEvent> </documentationOf> -->
+	<!--Encounter Information -->
+	<!--<componentOf> <encompassingEncounter> <code/> <effectiveTime value="20080929094914"/> 
+    </encompassingEncounter> </componentOf> -->
+	<!--CDA Structured Body -->
+	<component typeCode="COMP" contextConductionInd="true">
+		<structuredBody classCode="DOCBODY" moodCode="EVN">
+			<component typeCode="COMP" contextConductionInd="true">
+				<section classCode="DOCSECT" moodCode="EVN">
+					<!--CCD 3.9 Medication section template -->
+					<templateId root="2.16.840.1.113883.10.20.1.8"/>
+					<!--PCC Medication section template -->
+					<templateId root="1.3.6.1.4.1.19376.1.5.3.1.3.19"/>
+					<!--epSOS medication summary section template -->
+					<templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.2.3"/>
+					<id root="bd8a953a-761d-4136-95fc-5146223ef060"/>
+					<!--epSOS value set = epSOSSections (1.3.6.1.4.1.12559.11.10.1.3.1.42.26) -->
+					<code code="10160-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="HISTORY OF MEDICATION USE"/>
+					<title>Medikationsplan</title>
+					<text>
+						<table border="1">
+							<thead>
+								<tr>
+									<th rowspan="2">Status</th>
+									<th rowspan="2">Firma</th>
+									<th rowspan="2">Medikament</th>
+									<th colspan="12">Dosierung</th>
+								</tr>
+								<tr>
+									<th>Menge</th>
+									<th>Einheit</th>
+									<th>Art der Einnahme</th>
+									<th>Tageszeit</th>
+									<th>Von</th>
+									<th>Bis</th>
+								</tr>
+							</thead>
+							<tbody>
+								<!--Die variablen müssen ggf. noch angepasst werden -->
+								<tr>
+									<td>55561003</td>
+									<td>STADApharm GmbH</td>
+									<td>RAMIPRIL STADA 5 mg Tabletten</td>
+									<td>1</td>
+									<td>St.</td>
+									<td>CM - Zum Fruehstueck</td>
+									<td>Morgens</td>
+									<td>20120415</td>
+									<td>20130430</td>
+								</tr>
+								<tr>
+									<td>55561003</td>
+									<td>STADApharm GmbH</td>
+									<td>RAMIPRIL STADA 5 mg Tabletten</td>
+									<td>0</td>
+									<td>St.</td>
+									<td>ACD - Vor dem Mittagessen</td>
+									<td>Nachmittags</td>
+									<td>20120415</td>
+									<td>20130430</td>
+								</tr>
+								<tr>
+									<td>55561003</td>
+									<td>STADApharm GmbH</td>
+									<td>RAMIPRIL STADA 5 mg Tabletten</td>
+									<td>0</td>
+									<td>St.</td>
+									<td>ACV - Vor dem Abendessen</td>
+									<td>Abends</td>
+									<td>20120415</td>
+									<td>20130430</td>
+								</tr>
+								<tr>
+									<td>55561003</td>
+									<td>STADApharm GmbH</td>
+									<td>RAMIPRIL STADA 5 mg Tabletten</td>
+									<td>0</td>
+									<td>St.</td>
+									<td>HS - Vor dem Schlafengehen</td>
+									<td>Nachts</td>
+									<td>20120415</td>
+									<td>20130430</td>
+								</tr>
+								<tr>
+									<td>55561003</td>
+									<td>Mylan dura GmbH</td>
+									<td>HCT DURA 25 mg Tabletten</td>
+									<td>1</td>
+									<td>St.</td>
+									<td>CM - Zum Fruehstueck</td>
+									<td>Morgens</td>
+									<td>20120415</td>
+									<td>20130430</td>
+								</tr>
+								<tr>
+									<td>55561003</td>
+									<td>Mylan dura GmbH</td>
+									<td>HCT DURA 25 mg Tabletten</td>
+									<td>0</td>
+									<td>St.</td>
+									<td>ACD - Vor dem Mittagessen</td>
+									<td>Nachmittags</td>
+									<td>20120415</td>
+									<td>20130430</td>
+								</tr>
+								<tr>
+									<td>55561003</td>
+									<td>Mylan dura GmbH</td>
+									<td>HCT DURA 25 mg Tabletten</td>
+									<td>0</td>
+									<td>St.</td>
+									<td>ACV - Vor dem Abendessen</td>
+									<td>Abends</td>
+									<td>20120415</td>
+									<td>20130430</td>
+								</tr>
+								<tr>
+									<td>55561003</td>
+									<td>Mylan dura GmbH</td>
+									<td>HCT DURA 25 mg Tabletten</td>
+									<td>0</td>
+									<td>St.</td>
+									<td>HS - Vor dem Schlafengehen</td>
+									<td>Nachts</td>
+									<td>20120415</td>
+									<td>20130430</td>
+								</tr>
+								<tr>
+									<td>55561003</td>
+									<td>Westen Pharma GmbH</td>
+									<td>259057</td>
+									<td>0</td>
+									<td>St.</td>
+									<td>ACM - Vor dem Fruehstueck</td>
+									<td>Morgens</td>
+									<td>20120408</td>
+									<td>20130417</td>
+								</tr>
+								<tr>
+									<td>55561003</td>
+									<td>Westen Pharma GmbH</td>
+									<td>259057</td>
+									<td>0</td>
+									<td>St.</td>
+									<td>ACD - Vor dem Mittagessen</td>
+									<td>Nachmittags</td>
+									<td>20120408</td>
+									<td>20130417</td>
+								</tr>
+								<tr>
+									<td>55561003</td>
+									<td>Westen Pharma GmbH</td>
+									<td>259057</td>
+									<td>2</td>
+									<td>St.</td>
+									<td>PCV - Nach dem Abendessen</td>
+									<td>Abends</td>
+									<td>20120408</td>
+									<td>20130417</td>
+								</tr>
+								<tr>
+									<td>55561003</td>
+									<td>Westen Pharma GmbH</td>
+									<td>259057</td>
+									<td>0</td>
+									<td>St.</td>
+									<td>HS - Vor dem Schlafengehen</td>
+									<td>Nachts</td>
+									<td>20120408</td>
+									<td>20130417</td>
+								</tr>
+								<tr>
+									<td>55561003</td>
+									<td>Mibe GmbH Arzneimittel</td>
+									<td>SIMVALIP 20 mg Filmtabletten</td>
+									<td>0</td>
+									<td>St.</td>
+									<td>ACM - Vor dem Fruehstueck</td>
+									<td>Morgens</td>
+									<td>20120402</td>
+									<td>20130423</td>
+								</tr>
+								<tr>
+									<td>55561003</td>
+									<td>Mibe GmbH Arzneimittel</td>
+									<td>SIMVALIP 20 mg Filmtabletten</td>
+									<td>0</td>
+									<td>St.</td>
+									<td>ACD - Vor dem Mittagessen</td>
+									<td>Nachmittags</td>
+									<td>20120402</td>
+									<td>20130423</td>
+								</tr>
+								<tr>
+									<td>55561003</td>
+									<td>Mibe GmbH Arzneimittel</td>
+									<td>SIMVALIP 20 mg Filmtabletten</td>
+									<td>1</td>
+									<td>St.</td>
+									<td>PCV - Nach dem Abendessen</td>
+									<td>Abends</td>
+									<td>20120402</td>
+									<td>20130423</td>
+								</tr>
+								<tr>
+									<td>55561003</td>
+									<td>Mibe GmbH Arzneimittel</td>
+									<td>SIMVALIP 20 mg Filmtabletten</td>
+									<td>0</td>
+									<td>St.</td>
+									<td>HS - Vor dem Schlafengehen</td>
+									<td>Nachts</td>
+									<td>20120402</td>
+									<td>20130423</td>
+								</tr>
+							</tbody>
+						</table>
+					</text>
+					<!--Medication -->
+					<entry contextConductionInd="true" typeCode="DRIV">
+						<substanceAdministration classCode="SBADM" moodCode="EVN">
+							<templateId root="2.16.840.1.113883.10.20.1.24"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7"/>
+							<templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.3.4"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.1"/>
+							<id root="4ac405cf-eaf3-4853-88d7-b970048d5657"/>
+							<code code="Z99.1" codeSystem="1.2.276.0.76.5.388" codeSystemName="icd10gm2011" displayName="Bluthochdruck"/>
+							<statusCode code="completed"/>
+							<effectiveTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="IVL_TS">
+								<low value="20120415"/>
+								<high value="20130430"/>
+							</effectiveTime>
+							<effectiveTime operator="A" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="EIVL_TS">
+								<event code="CM" codeSystem="2.16.840.1.113883.5.139" codeSystemName="TimingEvent" displayName="Zum Fruehstueck"/>
+							</effectiveTime>
+							<routeCode code="20053000" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.12" codeSystemName="epSOSRoutesofAdministration" displayName="Orale Verwendung"/>
+							<doseQuantity>
+								<low unit="St." value="1"/>
+								<high unit="St." value="1"/>
+							</doseQuantity>
+							<consumable typeCode="CSM">
+								<manufacturedProduct classCode="MANU">
+									<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.2"/>
+									<templateId root="2.16.840.1.113883.10.20.1.53"/>
+									<manufacturedMaterial classCode="MMAT" determinerCode="KIND">
+										<templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.3.1"/>
+										<code code="4213891" codeSystem="1.2.276.0.76.4.6" codeSystemName="PZN" displayName="RAMIPRIL STADA 5 mg Tabletten">
+					</code>
+										<name>RAMIPRIL STADA 5 mg Tabletten</name>
+										<epsos:formCode xmlns:epsos="urn:epsos-org:ep:medication" code="12200" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.2" codeSystemName="epSOS:DoseForm" displayName="Tablette"/>
+										<epsos:asContent xmlns:epsos="urn:epsos-org:ep:medication" classCode="CONT">
+											<epsos:containerPackagedMedicine classCode="CONT" determinerCode="INSTANCE" xmlns:epsos="urn:epsos-org:ep:medication">
+												<epsos:name xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:formCode code="30066000" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.3" codeSystemName="epSOSPackage" displayName="Tablettendose" xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:lotNumberText xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:capacityQuantity unit="St." value="20" xmlns:epsos="urn:epsos-org:ep:medication"/>
+											</epsos:containerPackagedMedicine>
+										</epsos:asContent>
+										<epsos:ingredient xmlns:epsos="urn:epsos-org:ep:medication" classCode="ACTI">
+											<epsos:quantity xmlns:epsos="urn:epsos-org:ep:medication">
+												<epsos:numerator unit="mg" value="5" xmlns:epsos="urn:epsos-org:ep:medication" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="epsos:PQ"/>
+												<epsos:denominator unit="1" value="1" xmlns:epsos="urn:epsos-org:ep:medication" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="epsos:PQ"/>
+											</epsos:quantity>
+											<epsos:ingredient classCode="MMAT" determinerCode="KIND" xmlns:epsos="urn:epsos-org:ep:medication">
+												<epsos:code code="C09AA05" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.24" codeSystemName="ATC" displayName="Ramipril" xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:name xmlns:epsos="urn:epsos-org:ep:medication"/>
+											</epsos:ingredient>
+										</epsos:ingredient>
+									</manufacturedMaterial>
+									<manufacturerOrganization>
+										<name>STADApharm GmbH</name>
+									</manufacturerOrganization>
+								</manufacturedProduct>
+							</consumable>
+						</substanceAdministration>
+					</entry>
+					<entry contextConductionInd="true" typeCode="DRIV">
+						<substanceAdministration classCode="SBADM" moodCode="EVN">
+							<templateId root="2.16.840.1.113883.10.20.1.24"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7"/>
+							<templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.3.4"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.1"/>
+							<id root="4ac405cf-eaf3-4853-88d7-b970048d5657"/>
+							<code code="Z99.1" codeSystem="1.2.276.0.76.5.388" codeSystemName="icd10gm2011" displayName="Bluthochdruck"/>
+							<statusCode code="completed"/>
+							<effectiveTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="IVL_TS">
+								<low value="20120415"/>
+								<high value="20130430"/>
+							</effectiveTime>
+							<effectiveTime operator="A" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="EIVL_TS">
+								<event code="ACD" codeSystem="2.16.840.1.113883.5.139" codeSystemName="TimingEvent" displayName="Vor dem Mittagessen"/>
+							</effectiveTime>
+							<routeCode code="20053000" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.12" codeSystemName="epSOSRoutesofAdministration" displayName="Orale Verwendung"/>
+							<doseQuantity>
+								<low unit="St." value="0"/>
+								<high unit="St." value="0"/>
+							</doseQuantity>
+							<consumable typeCode="CSM">
+								<manufacturedProduct classCode="MANU">
+									<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.2"/>
+									<templateId root="2.16.840.1.113883.10.20.1.53"/>
+									<manufacturedMaterial classCode="MMAT" determinerCode="KIND">
+										<templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.3.1"/>
+										<code code="4213891" codeSystem="1.2.276.0.76.4.6" codeSystemName="PZN" displayName="RAMIPRIL STADA 5 mg Tabletten">
+					</code>
+										<name>RAMIPRIL STADA 5 mg Tabletten</name>
+										<epsos:formCode xmlns:epsos="urn:epsos-org:ep:medication" code="12200" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.2" codeSystemName="epSOS:DoseForm" displayName="Tablette"/>
+										<epsos:asContent xmlns:epsos="urn:epsos-org:ep:medication" classCode="CONT">
+											<epsos:containerPackagedMedicine classCode="CONT" determinerCode="INSTANCE" xmlns:epsos="urn:epsos-org:ep:medication">
+												<epsos:name xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:formCode code="30066000" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.3" codeSystemName="epSOSPackage" displayName="Tablettendose" xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:lotNumberText xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:capacityQuantity unit="St." value="20" xmlns:epsos="urn:epsos-org:ep:medication"/>
+											</epsos:containerPackagedMedicine>
+										</epsos:asContent>
+										<epsos:ingredient xmlns:epsos="urn:epsos-org:ep:medication" classCode="ACTI">
+											<epsos:quantity xmlns:epsos="urn:epsos-org:ep:medication">
+												<epsos:numerator unit="mg" value="5" xmlns:epsos="urn:epsos-org:ep:medication" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="epsos:PQ"/>
+												<epsos:denominator unit="1" value="1" xmlns:epsos="urn:epsos-org:ep:medication" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="epsos:PQ"/>
+											</epsos:quantity>
+											<epsos:ingredient classCode="MMAT" determinerCode="KIND" xmlns:epsos="urn:epsos-org:ep:medication">
+												<epsos:code code="C09AA05" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.24" codeSystemName="ATC" displayName="Ramipril" xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:name xmlns:epsos="urn:epsos-org:ep:medication"/>
+											</epsos:ingredient>
+										</epsos:ingredient>
+									</manufacturedMaterial>
+									<manufacturerOrganization>
+										<name>STADApharm GmbH</name>
+									</manufacturerOrganization>
+								</manufacturedProduct>
+							</consumable>
+						</substanceAdministration>
+					</entry>
+					<entry contextConductionInd="true" typeCode="DRIV">
+						<substanceAdministration classCode="SBADM" moodCode="EVN">
+							<templateId root="2.16.840.1.113883.10.20.1.24"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7"/>
+							<templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.3.4"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.1"/>
+							<id root="4ac405cf-eaf3-4853-88d7-b970048d5657"/>
+							<code code="Z99.1" codeSystem="1.2.276.0.76.5.388" codeSystemName="icd10gm2011" displayName="Bluthochdruck"/>
+							<statusCode code="completed"/>
+							<effectiveTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="IVL_TS">
+								<low value="20120415"/>
+								<high value="20130430"/>
+							</effectiveTime>
+							<effectiveTime operator="A" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="EIVL_TS">
+								<event code="ACV" codeSystem="2.16.840.1.113883.5.139" codeSystemName="TimingEvent" displayName="Vor dem Abendessen"/>
+							</effectiveTime>
+							<routeCode code="20053000" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.12" codeSystemName="epSOSRoutesofAdministration" displayName="Orale Verwendung"/>
+							<doseQuantity>
+								<low unit="St." value="0"/>
+								<high unit="St." value="0"/>
+							</doseQuantity>
+							<consumable typeCode="CSM">
+								<manufacturedProduct classCode="MANU">
+									<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.2"/>
+									<templateId root="2.16.840.1.113883.10.20.1.53"/>
+									<manufacturedMaterial classCode="MMAT" determinerCode="KIND">
+										<templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.3.1"/>
+										<code code="4213891" codeSystem="1.2.276.0.76.4.6" codeSystemName="PZN" displayName="RAMIPRIL STADA 5 mg Tabletten">
+					</code>
+										<name>RAMIPRIL STADA 5 mg Tabletten</name>
+										<epsos:formCode xmlns:epsos="urn:epsos-org:ep:medication" code="12200" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.2" codeSystemName="epSOS:DoseForm" displayName="Tablette"/>
+										<epsos:asContent xmlns:epsos="urn:epsos-org:ep:medication" classCode="CONT">
+											<epsos:containerPackagedMedicine classCode="CONT" determinerCode="INSTANCE" xmlns:epsos="urn:epsos-org:ep:medication">
+												<epsos:name xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:formCode code="30066000" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.3" codeSystemName="epSOSPackage" displayName="Tablettendose" xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:lotNumberText xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:capacityQuantity unit="St." value="20" xmlns:epsos="urn:epsos-org:ep:medication"/>
+											</epsos:containerPackagedMedicine>
+										</epsos:asContent>
+										<epsos:ingredient xmlns:epsos="urn:epsos-org:ep:medication" classCode="ACTI">
+											<epsos:quantity xmlns:epsos="urn:epsos-org:ep:medication">
+												<epsos:numerator unit="mg" value="5" xmlns:epsos="urn:epsos-org:ep:medication" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="epsos:PQ"/>
+												<epsos:denominator unit="1" value="1" xmlns:epsos="urn:epsos-org:ep:medication" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="epsos:PQ"/>
+											</epsos:quantity>
+											<epsos:ingredient classCode="MMAT" determinerCode="KIND" xmlns:epsos="urn:epsos-org:ep:medication">
+												<epsos:code code="C09AA05" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.24" codeSystemName="ATC" displayName="Ramipril" xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:name xmlns:epsos="urn:epsos-org:ep:medication"/>
+											</epsos:ingredient>
+										</epsos:ingredient>
+									</manufacturedMaterial>
+									<manufacturerOrganization>
+										<name>STADApharm GmbH</name>
+									</manufacturerOrganization>
+								</manufacturedProduct>
+							</consumable>
+						</substanceAdministration>
+					</entry>
+					<entry contextConductionInd="true" typeCode="DRIV">
+						<substanceAdministration classCode="SBADM" moodCode="EVN">
+							<templateId root="2.16.840.1.113883.10.20.1.24"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7"/>
+							<templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.3.4"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.1"/>
+							<id root="4ac405cf-eaf3-4853-88d7-b970048d5657"/>
+							<code code="Z99.1" codeSystem="1.2.276.0.76.5.388" codeSystemName="icd10gm2011" displayName="Bluthochdruck"/>
+							<statusCode code="completed"/>
+							<effectiveTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="IVL_TS">
+								<low value="20120415"/>
+								<high value="20130430"/>
+							</effectiveTime>
+							<effectiveTime operator="A" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="EIVL_TS">
+								<event code="HS" codeSystem="2.16.840.1.113883.5.139" codeSystemName="TimingEvent" displayName="Vor dem Schlafengehen"/>
+							</effectiveTime>
+							<routeCode code="20053000" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.12" codeSystemName="epSOSRoutesofAdministration" displayName="Orale Verwendung"/>
+							<doseQuantity>
+								<low unit="St." value="0"/>
+								<high unit="St." value="0"/>
+							</doseQuantity>
+							<consumable typeCode="CSM">
+								<manufacturedProduct classCode="MANU">
+									<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.2"/>
+									<templateId root="2.16.840.1.113883.10.20.1.53"/>
+									<manufacturedMaterial classCode="MMAT" determinerCode="KIND">
+										<templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.3.1"/>
+										<code code="4213891" codeSystem="1.2.276.0.76.4.6" codeSystemName="PZN" displayName="RAMIPRIL STADA 5 mg Tabletten">
+					</code>
+										<name>RAMIPRIL STADA 5 mg Tabletten</name>
+										<epsos:formCode xmlns:epsos="urn:epsos-org:ep:medication" code="12200" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.2" codeSystemName="epSOS:DoseForm" displayName="Tablette"/>
+										<epsos:asContent xmlns:epsos="urn:epsos-org:ep:medication" classCode="CONT">
+											<epsos:containerPackagedMedicine classCode="CONT" determinerCode="INSTANCE" xmlns:epsos="urn:epsos-org:ep:medication">
+												<epsos:name xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:formCode code="30066000" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.3" codeSystemName="epSOSPackage" displayName="Tablettendose" xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:lotNumberText xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:capacityQuantity unit="St." value="20" xmlns:epsos="urn:epsos-org:ep:medication"/>
+											</epsos:containerPackagedMedicine>
+										</epsos:asContent>
+										<epsos:ingredient xmlns:epsos="urn:epsos-org:ep:medication" classCode="ACTI">
+											<epsos:quantity xmlns:epsos="urn:epsos-org:ep:medication">
+												<epsos:numerator unit="mg" value="5" xmlns:epsos="urn:epsos-org:ep:medication" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="epsos:PQ"/>
+												<epsos:denominator unit="1" value="1" xmlns:epsos="urn:epsos-org:ep:medication" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="epsos:PQ"/>
+											</epsos:quantity>
+											<epsos:ingredient classCode="MMAT" determinerCode="KIND" xmlns:epsos="urn:epsos-org:ep:medication">
+												<epsos:code code="C09AA05" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.24" codeSystemName="ATC" displayName="Ramipril" xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:name xmlns:epsos="urn:epsos-org:ep:medication"/>
+											</epsos:ingredient>
+										</epsos:ingredient>
+									</manufacturedMaterial>
+									<manufacturerOrganization>
+										<name>STADApharm GmbH</name>
+									</manufacturerOrganization>
+								</manufacturedProduct>
+							</consumable>
+						</substanceAdministration>
+					</entry>
+					<entry contextConductionInd="true" typeCode="DRIV">
+						<substanceAdministration classCode="SBADM" moodCode="EVN">
+							<templateId root="2.16.840.1.113883.10.20.1.24"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7"/>
+							<templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.3.4"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.1"/>
+							<id root="dd622524-6d7d-4bd7-b12e-1b1a00671cdd"/>
+							<code code="Z99.1" codeSystem="1.2.276.0.76.5.388" codeSystemName="icd10gm2011" displayName="Bluthochdruck"/>
+							<statusCode code="completed"/>
+							<effectiveTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="IVL_TS">
+								<low value="20120415"/>
+								<high value="20130430"/>
+							</effectiveTime>
+							<effectiveTime operator="A" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="EIVL_TS">
+								<event code="CM" codeSystem="2.16.840.1.113883.5.139" codeSystemName="TimingEvent" displayName="Zum Fruehstueck"/>
+							</effectiveTime>
+							<routeCode code="20053000" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.12" codeSystemName="epSOSRoutesofAdministration" displayName="Orale Verwendung"/>
+							<doseQuantity>
+								<low unit="St." value="1"/>
+								<high unit="St." value="1"/>
+							</doseQuantity>
+							<consumable typeCode="CSM">
+								<manufacturedProduct classCode="MANU">
+									<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.2"/>
+									<templateId root="2.16.840.1.113883.10.20.1.53"/>
+									<manufacturedMaterial classCode="MMAT" determinerCode="KIND">
+										<templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.3.1"/>
+										<code code="1167417" codeSystem="1.2.276.0.76.4.6" codeSystemName="PZN" displayName="HCT DURA 25 mg Tabletten">
+					</code>
+										<name>HCT DURA 25 mg Tabletten</name>
+										<epsos:formCode xmlns:epsos="urn:epsos-org:ep:medication" code="12200" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.2" codeSystemName="epSOS:DoseForm" displayName="Tablette"/>
+										<epsos:asContent xmlns:epsos="urn:epsos-org:ep:medication" classCode="CONT">
+											<epsos:containerPackagedMedicine classCode="CONT" determinerCode="INSTANCE" xmlns:epsos="urn:epsos-org:ep:medication">
+												<epsos:name xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:formCode code="30066000" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.3" codeSystemName="epSOSPackage" displayName="Tablettendose" xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:lotNumberText xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:capacityQuantity unit="St." value="50" xmlns:epsos="urn:epsos-org:ep:medication"/>
+											</epsos:containerPackagedMedicine>
+										</epsos:asContent>
+										<epsos:ingredient xmlns:epsos="urn:epsos-org:ep:medication" classCode="ACTI">
+											<epsos:quantity xmlns:epsos="urn:epsos-org:ep:medication">
+												<epsos:numerator unit="mg" value="25" xmlns:epsos="urn:epsos-org:ep:medication" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="epsos:PQ"/>
+												<epsos:denominator unit="1" value="1" xmlns:epsos="urn:epsos-org:ep:medication" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="epsos:PQ"/>
+											</epsos:quantity>
+											<epsos:ingredient classCode="MMAT" determinerCode="KIND" xmlns:epsos="urn:epsos-org:ep:medication">
+												<epsos:code code="C03AA03" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.24" codeSystemName="ATC" displayName="Hydrochlorothiazid" xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:name xmlns:epsos="urn:epsos-org:ep:medication"/>
+											</epsos:ingredient>
+										</epsos:ingredient>
+									</manufacturedMaterial>
+									<manufacturerOrganization>
+										<name>Mylan dura GmbH</name>
+									</manufacturerOrganization>
+								</manufacturedProduct>
+							</consumable>
+						</substanceAdministration>
+					</entry>
+					<entry contextConductionInd="true" typeCode="DRIV">
+						<substanceAdministration classCode="SBADM" moodCode="EVN">
+							<templateId root="2.16.840.1.113883.10.20.1.24"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7"/>
+							<templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.3.4"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.1"/>
+							<id root="dd622524-6d7d-4bd7-b12e-1b1a00671cdd"/>
+							<code code="Z99.1" codeSystem="1.2.276.0.76.5.388" codeSystemName="icd10gm2011" displayName="Bluthochdruck"/>
+							<statusCode code="completed"/>
+							<effectiveTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="IVL_TS">
+								<low value="20120415"/>
+								<high value="20130430"/>
+							</effectiveTime>
+							<effectiveTime operator="A" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="EIVL_TS">
+								<event code="ACD" codeSystem="2.16.840.1.113883.5.139" codeSystemName="TimingEvent" displayName="Vor dem Mittagessen"/>
+							</effectiveTime>
+							<routeCode code="20053000" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.12" codeSystemName="epSOSRoutesofAdministration" displayName="Orale Verwendung"/>
+							<doseQuantity>
+								<low unit="St." value="0"/>
+								<high unit="St." value="0"/>
+							</doseQuantity>
+							<consumable typeCode="CSM">
+								<manufacturedProduct classCode="MANU">
+									<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.2"/>
+									<templateId root="2.16.840.1.113883.10.20.1.53"/>
+									<manufacturedMaterial classCode="MMAT" determinerCode="KIND">
+										<templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.3.1"/>
+										<code code="1167417" codeSystem="1.2.276.0.76.4.6" codeSystemName="PZN" displayName="HCT DURA 25 mg Tabletten">
+					</code>
+										<name>HCT DURA 25 mg Tabletten</name>
+										<epsos:formCode xmlns:epsos="urn:epsos-org:ep:medication" code="12200" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.2" codeSystemName="epSOS:DoseForm" displayName="Tablette"/>
+										<epsos:asContent xmlns:epsos="urn:epsos-org:ep:medication" classCode="CONT">
+											<epsos:containerPackagedMedicine classCode="CONT" determinerCode="INSTANCE" xmlns:epsos="urn:epsos-org:ep:medication">
+												<epsos:name xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:formCode code="30066000" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.3" codeSystemName="epSOSPackage" displayName="Tablettendose" xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:lotNumberText xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:capacityQuantity unit="St." value="50" xmlns:epsos="urn:epsos-org:ep:medication"/>
+											</epsos:containerPackagedMedicine>
+										</epsos:asContent>
+										<epsos:ingredient xmlns:epsos="urn:epsos-org:ep:medication" classCode="ACTI">
+											<epsos:quantity xmlns:epsos="urn:epsos-org:ep:medication">
+												<epsos:numerator unit="mg" value="25" xmlns:epsos="urn:epsos-org:ep:medication" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="epsos:PQ"/>
+												<epsos:denominator unit="1" value="1" xmlns:epsos="urn:epsos-org:ep:medication" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="epsos:PQ"/>
+											</epsos:quantity>
+											<epsos:ingredient classCode="MMAT" determinerCode="KIND" xmlns:epsos="urn:epsos-org:ep:medication">
+												<epsos:code code="C03AA03" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.24" codeSystemName="ATC" displayName="Hydrochlorothiazid" xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:name xmlns:epsos="urn:epsos-org:ep:medication"/>
+											</epsos:ingredient>
+										</epsos:ingredient>
+									</manufacturedMaterial>
+									<manufacturerOrganization>
+										<name>Mylan dura GmbH</name>
+									</manufacturerOrganization>
+								</manufacturedProduct>
+							</consumable>
+						</substanceAdministration>
+					</entry>
+					<entry contextConductionInd="true" typeCode="DRIV">
+						<substanceAdministration classCode="SBADM" moodCode="EVN">
+							<templateId root="2.16.840.1.113883.10.20.1.24"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7"/>
+							<templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.3.4"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.1"/>
+							<id root="dd622524-6d7d-4bd7-b12e-1b1a00671cdd"/>
+							<code code="Z99.1" codeSystem="1.2.276.0.76.5.388" codeSystemName="icd10gm2011" displayName="Bluthochdruck"/>
+							<statusCode code="completed"/>
+							<effectiveTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="IVL_TS">
+								<low value="20120415"/>
+								<high value="20130430"/>
+							</effectiveTime>
+							<effectiveTime operator="A" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="EIVL_TS">
+								<event code="ACV" codeSystem="2.16.840.1.113883.5.139" codeSystemName="TimingEvent" displayName="Vor dem Abendessen"/>
+							</effectiveTime>
+							<routeCode code="20053000" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.12" codeSystemName="epSOSRoutesofAdministration" displayName="Orale Verwendung"/>
+							<doseQuantity>
+								<low unit="St." value="0"/>
+								<high unit="St." value="0"/>
+							</doseQuantity>
+							<consumable typeCode="CSM">
+								<manufacturedProduct classCode="MANU">
+									<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.2"/>
+									<templateId root="2.16.840.1.113883.10.20.1.53"/>
+									<manufacturedMaterial classCode="MMAT" determinerCode="KIND">
+										<templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.3.1"/>
+										<code code="1167417" codeSystem="1.2.276.0.76.4.6" codeSystemName="PZN" displayName="HCT DURA 25 mg Tabletten">
+					</code>
+										<name>HCT DURA 25 mg Tabletten</name>
+										<epsos:formCode xmlns:epsos="urn:epsos-org:ep:medication" code="12200" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.2" codeSystemName="epSOS:DoseForm" displayName="Tablette"/>
+										<epsos:asContent xmlns:epsos="urn:epsos-org:ep:medication" classCode="CONT">
+											<epsos:containerPackagedMedicine classCode="CONT" determinerCode="INSTANCE" xmlns:epsos="urn:epsos-org:ep:medication">
+												<epsos:name xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:formCode code="30066000" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.3" codeSystemName="epSOSPackage" displayName="Tablettendose" xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:lotNumberText xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:capacityQuantity unit="St." value="50" xmlns:epsos="urn:epsos-org:ep:medication"/>
+											</epsos:containerPackagedMedicine>
+										</epsos:asContent>
+										<epsos:ingredient xmlns:epsos="urn:epsos-org:ep:medication" classCode="ACTI">
+											<epsos:quantity xmlns:epsos="urn:epsos-org:ep:medication">
+												<epsos:numerator unit="mg" value="25" xmlns:epsos="urn:epsos-org:ep:medication" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="epsos:PQ"/>
+												<epsos:denominator unit="1" value="1" xmlns:epsos="urn:epsos-org:ep:medication" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="epsos:PQ"/>
+											</epsos:quantity>
+											<epsos:ingredient classCode="MMAT" determinerCode="KIND" xmlns:epsos="urn:epsos-org:ep:medication">
+												<epsos:code code="C03AA03" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.24" codeSystemName="ATC" displayName="Hydrochlorothiazid" xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:name xmlns:epsos="urn:epsos-org:ep:medication"/>
+											</epsos:ingredient>
+										</epsos:ingredient>
+									</manufacturedMaterial>
+									<manufacturerOrganization>
+										<name>Mylan dura GmbH</name>
+									</manufacturerOrganization>
+								</manufacturedProduct>
+							</consumable>
+						</substanceAdministration>
+					</entry>
+					<entry contextConductionInd="true" typeCode="DRIV">
+						<substanceAdministration classCode="SBADM" moodCode="EVN">
+							<templateId root="2.16.840.1.113883.10.20.1.24"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7"/>
+							<templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.3.4"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.1"/>
+							<id root="dd622524-6d7d-4bd7-b12e-1b1a00671cdd"/>
+							<code code="Z99.1" codeSystem="1.2.276.0.76.5.388" codeSystemName="icd10gm2011" displayName="Bluthochdruck"/>
+							<statusCode code="completed"/>
+							<effectiveTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="IVL_TS">
+								<low value="20120415"/>
+								<high value="20130430"/>
+							</effectiveTime>
+							<effectiveTime operator="A" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="EIVL_TS">
+								<event code="HS" codeSystem="2.16.840.1.113883.5.139" codeSystemName="TimingEvent" displayName="Vor dem Schlafengehen"/>
+							</effectiveTime>
+							<routeCode code="20053000" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.12" codeSystemName="epSOSRoutesofAdministration" displayName="Orale Verwendung"/>
+							<doseQuantity>
+								<low unit="St." value="0"/>
+								<high unit="St." value="0"/>
+							</doseQuantity>
+							<consumable typeCode="CSM">
+								<manufacturedProduct classCode="MANU">
+									<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.2"/>
+									<templateId root="2.16.840.1.113883.10.20.1.53"/>
+									<manufacturedMaterial classCode="MMAT" determinerCode="KIND">
+										<templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.3.1"/>
+										<code code="1167417" codeSystem="1.2.276.0.76.4.6" codeSystemName="PZN" displayName="HCT DURA 25 mg Tabletten">
+					</code>
+										<name>HCT DURA 25 mg Tabletten</name>
+										<epsos:formCode xmlns:epsos="urn:epsos-org:ep:medication" code="12200" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.2" codeSystemName="epSOS:DoseForm" displayName="Tablette"/>
+										<epsos:asContent xmlns:epsos="urn:epsos-org:ep:medication" classCode="CONT">
+											<epsos:containerPackagedMedicine classCode="CONT" determinerCode="INSTANCE" xmlns:epsos="urn:epsos-org:ep:medication">
+												<epsos:name xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:formCode code="30066000" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.3" codeSystemName="epSOSPackage" displayName="Tablettendose" xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:lotNumberText xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:capacityQuantity unit="St." value="50" xmlns:epsos="urn:epsos-org:ep:medication"/>
+											</epsos:containerPackagedMedicine>
+										</epsos:asContent>
+										<epsos:ingredient xmlns:epsos="urn:epsos-org:ep:medication" classCode="ACTI">
+											<epsos:quantity xmlns:epsos="urn:epsos-org:ep:medication">
+												<epsos:numerator unit="mg" value="25" xmlns:epsos="urn:epsos-org:ep:medication" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="epsos:PQ"/>
+												<epsos:denominator unit="1" value="1" xmlns:epsos="urn:epsos-org:ep:medication" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="epsos:PQ"/>
+											</epsos:quantity>
+											<epsos:ingredient classCode="MMAT" determinerCode="KIND" xmlns:epsos="urn:epsos-org:ep:medication">
+												<epsos:code code="C03AA03" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.24" codeSystemName="ATC" displayName="Hydrochlorothiazid" xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:name xmlns:epsos="urn:epsos-org:ep:medication"/>
+											</epsos:ingredient>
+										</epsos:ingredient>
+									</manufacturedMaterial>
+									<manufacturerOrganization>
+										<name>Mylan dura GmbH</name>
+									</manufacturerOrganization>
+								</manufacturedProduct>
+							</consumable>
+						</substanceAdministration>
+					</entry>
+					<entry contextConductionInd="true" typeCode="DRIV">
+						<substanceAdministration classCode="SBADM" moodCode="EVN">
+							<templateId root="2.16.840.1.113883.10.20.1.24"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7"/>
+							<templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.3.4"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.1"/>
+							<id root="aaa5b916-ada0-4729-9778-7bd7219e0ede"/>
+							<code code="Z99.2" codeSystem="1.2.276.0.76.5.388" codeSystemName="icd10gm2011" displayName="arterieller Verschluss"/>
+							<statusCode code="completed"/>
+							<effectiveTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="IVL_TS">
+								<low value="20120408"/>
+								<high value="20130417"/>
+							</effectiveTime>
+							<effectiveTime operator="A" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="EIVL_TS">
+								<event code="ACM" codeSystem="2.16.840.1.113883.5.139" codeSystemName="TimingEvent" displayName="Vor dem Fruehstueck"/>
+							</effectiveTime>
+							<routeCode code="20053000" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.12" codeSystemName="epSOSRoutesofAdministration" displayName="Orale Verwendung"/>
+							<doseQuantity>
+								<low unit="St." value="0"/>
+								<high unit="St." value="0"/>
+							</doseQuantity>
+							<consumable typeCode="CSM">
+								<manufacturedProduct classCode="MANU">
+									<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.2"/>
+									<templateId root="2.16.840.1.113883.10.20.1.53"/>
+									<manufacturedMaterial classCode="MMAT" determinerCode="KIND">
+										<templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.3.1"/>
+										<code code="259057" codeSystem="1.2.276.0.76.4.6" codeSystemName="PZN" displayName="Plavix 75mg">
+					</code>
+										<name>Plavix 75mg</name>
+										<epsos:formCode xmlns:epsos="urn:epsos-org:ep:medication" code="12200" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.2" codeSystemName="epSOS:DoseForm" displayName="Tablette"/>
+										<epsos:asContent xmlns:epsos="urn:epsos-org:ep:medication" classCode="CONT">
+											<epsos:containerPackagedMedicine classCode="CONT" determinerCode="INSTANCE" xmlns:epsos="urn:epsos-org:ep:medication">
+												<epsos:name xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:formCode code="30066000" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.3" codeSystemName="epSOSPackage" displayName="Tablettendose" xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:lotNumberText xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:capacityQuantity unit="St." value="28" xmlns:epsos="urn:epsos-org:ep:medication"/>
+											</epsos:containerPackagedMedicine>
+										</epsos:asContent>
+										<epsos:ingredient xmlns:epsos="urn:epsos-org:ep:medication" classCode="ACTI">
+											<epsos:quantity xmlns:epsos="urn:epsos-org:ep:medication">
+												<epsos:numerator unit="mg" value="75" xmlns:epsos="urn:epsos-org:ep:medication" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="epsos:PQ"/>
+												<epsos:denominator unit="1" value="1" xmlns:epsos="urn:epsos-org:ep:medication" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="epsos:PQ"/>
+											</epsos:quantity>
+											<epsos:ingredient classCode="MMAT" determinerCode="KIND" xmlns:epsos="urn:epsos-org:ep:medication">
+												<epsos:code code="B01AC04" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.24" codeSystemName="ATC" displayName="Clopidogrel" xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:name xmlns:epsos="urn:epsos-org:ep:medication"/>
+											</epsos:ingredient>
+										</epsos:ingredient>
+									</manufacturedMaterial>
+									<manufacturerOrganization>
+										<name>Westen Pharma GmbH</name>
+									</manufacturerOrganization>
+								</manufacturedProduct>
+							</consumable>
+						</substanceAdministration>
+					</entry>
+					<entry contextConductionInd="true" typeCode="DRIV">
+						<substanceAdministration classCode="SBADM" moodCode="EVN">
+							<templateId root="2.16.840.1.113883.10.20.1.24"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7"/>
+							<templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.3.4"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.1"/>
+							<id root="aaa5b916-ada0-4729-9778-7bd7219e0ede"/>
+							<code code="Z99.2" codeSystem="1.2.276.0.76.5.388" codeSystemName="icd10gm2011" displayName="arterieller Verschluss"/>
+							<statusCode code="completed"/>
+							<effectiveTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="IVL_TS">
+								<low value="20120408"/>
+								<high value="20130417"/>
+							</effectiveTime>
+							<effectiveTime operator="A" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="EIVL_TS">
+								<event code="ACD" codeSystem="2.16.840.1.113883.5.139" codeSystemName="TimingEvent" displayName="Vor dem Mittagessen"/>
+							</effectiveTime>
+							<routeCode code="20053000" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.12" codeSystemName="epSOSRoutesofAdministration" displayName="Orale Verwendung"/>
+							<doseQuantity>
+								<low unit="St." value="0"/>
+								<high unit="St." value="0"/>
+							</doseQuantity>
+							<consumable typeCode="CSM">
+								<manufacturedProduct classCode="MANU">
+									<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.2"/>
+									<templateId root="2.16.840.1.113883.10.20.1.53"/>
+									<manufacturedMaterial classCode="MMAT" determinerCode="KIND">
+										<templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.3.1"/>
+										<code code="259057" codeSystem="1.2.276.0.76.4.6" codeSystemName="PZN" displayName="Plavix 75mg">
+					</code>
+										<name>Plavix 75mg</name>
+										<epsos:formCode xmlns:epsos="urn:epsos-org:ep:medication" code="12200" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.2" codeSystemName="epSOS:DoseForm" displayName="Tablette"/>
+										<epsos:asContent xmlns:epsos="urn:epsos-org:ep:medication" classCode="CONT">
+											<epsos:containerPackagedMedicine classCode="CONT" determinerCode="INSTANCE" xmlns:epsos="urn:epsos-org:ep:medication">
+												<epsos:name xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:formCode code="30066000" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.3" codeSystemName="epSOSPackage" displayName="Tablettendose" xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:lotNumberText xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:capacityQuantity unit="St." value="28" xmlns:epsos="urn:epsos-org:ep:medication"/>
+											</epsos:containerPackagedMedicine>
+										</epsos:asContent>
+										<epsos:ingredient xmlns:epsos="urn:epsos-org:ep:medication" classCode="ACTI">
+											<epsos:quantity xmlns:epsos="urn:epsos-org:ep:medication">
+												<epsos:numerator unit="mg" value="75" xmlns:epsos="urn:epsos-org:ep:medication" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="epsos:PQ"/>
+												<epsos:denominator unit="1" value="1" xmlns:epsos="urn:epsos-org:ep:medication" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="epsos:PQ"/>
+											</epsos:quantity>
+											<epsos:ingredient classCode="MMAT" determinerCode="KIND" xmlns:epsos="urn:epsos-org:ep:medication">
+												<epsos:code code="B01AC04" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.24" codeSystemName="ATC" displayName="Clopidogrel" xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:name xmlns:epsos="urn:epsos-org:ep:medication"/>
+											</epsos:ingredient>
+										</epsos:ingredient>
+									</manufacturedMaterial>
+									<manufacturerOrganization>
+										<name>Westen Pharma GmbH</name>
+									</manufacturerOrganization>
+								</manufacturedProduct>
+							</consumable>
+						</substanceAdministration>
+					</entry>
+					<entry contextConductionInd="true" typeCode="DRIV">
+						<substanceAdministration classCode="SBADM" moodCode="EVN">
+							<templateId root="2.16.840.1.113883.10.20.1.24"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7"/>
+							<templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.3.4"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.1"/>
+							<id root="aaa5b916-ada0-4729-9778-7bd7219e0ede"/>
+							<code code="Z99.2" codeSystem="1.2.276.0.76.5.388" codeSystemName="icd10gm2011" displayName="arterieller Verschluss"/>
+							<statusCode code="completed"/>
+							<effectiveTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="IVL_TS">
+								<low value="20120408"/>
+								<high value="20130417"/>
+							</effectiveTime>
+							<effectiveTime operator="A" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="EIVL_TS">
+								<event code="CV" codeSystem="2.16.840.1.113883.5.139" codeSystemName="TimingEvent" displayName="Zum Abendessen"/>
+							</effectiveTime>
+							<routeCode code="20053000" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.12" codeSystemName="epSOSRoutesofAdministration" displayName="Orale Verwendung"/>
+							<doseQuantity>
+								<low unit="St." value="1"/>
+								<high unit="St." value="1"/>
+							</doseQuantity>
+							<consumable typeCode="CSM">
+								<manufacturedProduct classCode="MANU">
+									<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.2"/>
+									<templateId root="2.16.840.1.113883.10.20.1.53"/>
+									<manufacturedMaterial classCode="MMAT" determinerCode="KIND">
+										<templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.3.1"/>
+										<code code="259057" codeSystem="1.2.276.0.76.4.6" codeSystemName="PZN" displayName="Plavix 75mg">
+					</code>
+										<name>Plavix 75mg</name>
+										<epsos:formCode xmlns:epsos="urn:epsos-org:ep:medication" code="12200" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.2" codeSystemName="epSOS:DoseForm" displayName="Tablette"/>
+										<epsos:asContent xmlns:epsos="urn:epsos-org:ep:medication" classCode="CONT">
+											<epsos:containerPackagedMedicine classCode="CONT" determinerCode="INSTANCE" xmlns:epsos="urn:epsos-org:ep:medication">
+												<epsos:name xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:formCode code="30066000" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.3" codeSystemName="epSOSPackage" displayName="Tablettendose" xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:lotNumberText xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:capacityQuantity unit="St." value="28" xmlns:epsos="urn:epsos-org:ep:medication"/>
+											</epsos:containerPackagedMedicine>
+										</epsos:asContent>
+										<epsos:ingredient xmlns:epsos="urn:epsos-org:ep:medication" classCode="ACTI">
+											<epsos:quantity xmlns:epsos="urn:epsos-org:ep:medication">
+												<epsos:numerator unit="mg" value="75" xmlns:epsos="urn:epsos-org:ep:medication" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="epsos:PQ"/>
+												<epsos:denominator unit="1" value="1" xmlns:epsos="urn:epsos-org:ep:medication" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="epsos:PQ"/>
+											</epsos:quantity>
+											<epsos:ingredient classCode="MMAT" determinerCode="KIND" xmlns:epsos="urn:epsos-org:ep:medication">
+												<epsos:code code="B01AC04" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.24" codeSystemName="ATC" displayName="Clopidogrel" xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:name xmlns:epsos="urn:epsos-org:ep:medication"/>
+											</epsos:ingredient>
+										</epsos:ingredient>
+									</manufacturedMaterial>
+									<manufacturerOrganization>
+										<name>Westen Pharma GmbH</name>
+									</manufacturerOrganization>
+								</manufacturedProduct>
+							</consumable>
+						</substanceAdministration>
+					</entry>
+					<entry contextConductionInd="true" typeCode="DRIV">
+						<substanceAdministration classCode="SBADM" moodCode="EVN">
+							<templateId root="2.16.840.1.113883.10.20.1.24"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7"/>
+							<templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.3.4"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.1"/>
+							<id root="aaa5b916-ada0-4729-9778-7bd7219e0ede"/>
+							<code code="Z99.2" codeSystem="1.2.276.0.76.5.388" codeSystemName="icd10gm2011" displayName="arterieller Verschluss"/>
+							<statusCode code="completed"/>
+							<effectiveTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="IVL_TS">
+								<low value="20120408"/>
+								<high value="20130417"/>
+							</effectiveTime>
+							<effectiveTime operator="A" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="EIVL_TS">
+								<event code="HS" codeSystem="2.16.840.1.113883.5.139" codeSystemName="TimingEvent" displayName="Vor dem Schlafengehen"/>
+							</effectiveTime>
+							<routeCode code="20053000" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.12" codeSystemName="epSOSRoutesofAdministration" displayName="Orale Verwendung"/>
+							<doseQuantity>
+								<low unit="St." value="0"/>
+								<high unit="St." value="0"/>
+							</doseQuantity>
+							<consumable typeCode="CSM">
+								<manufacturedProduct classCode="MANU">
+									<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.2"/>
+									<templateId root="2.16.840.1.113883.10.20.1.53"/>
+									<manufacturedMaterial classCode="MMAT" determinerCode="KIND">
+										<templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.3.1"/>
+										<code code="259057" codeSystem="1.2.276.0.76.4.6" codeSystemName="PZN" displayName="Plavix 75mg">
+					</code>
+										<name>Plavix 75mg</name>
+										<epsos:formCode xmlns:epsos="urn:epsos-org:ep:medication" code="12200" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.2" codeSystemName="epSOS:DoseForm" displayName="Tablette"/>
+										<epsos:asContent xmlns:epsos="urn:epsos-org:ep:medication" classCode="CONT">
+											<epsos:containerPackagedMedicine classCode="CONT" determinerCode="INSTANCE" xmlns:epsos="urn:epsos-org:ep:medication">
+												<epsos:name xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:formCode code="30066000" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.3" codeSystemName="epSOSPackage" displayName="Tablettendose" xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:lotNumberText xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:capacityQuantity unit="St." value="28" xmlns:epsos="urn:epsos-org:ep:medication"/>
+											</epsos:containerPackagedMedicine>
+										</epsos:asContent>
+										<epsos:ingredient xmlns:epsos="urn:epsos-org:ep:medication" classCode="ACTI">
+											<epsos:quantity xmlns:epsos="urn:epsos-org:ep:medication">
+												<epsos:numerator unit="mg" value="75" xmlns:epsos="urn:epsos-org:ep:medication" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="epsos:PQ"/>
+												<epsos:denominator unit="1" value="1" xmlns:epsos="urn:epsos-org:ep:medication" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="epsos:PQ"/>
+											</epsos:quantity>
+											<epsos:ingredient classCode="MMAT" determinerCode="KIND" xmlns:epsos="urn:epsos-org:ep:medication">
+												<epsos:code code="B01AC04" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.24" codeSystemName="ATC" displayName="Clopidogrel" xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:name xmlns:epsos="urn:epsos-org:ep:medication"/>
+											</epsos:ingredient>
+										</epsos:ingredient>
+									</manufacturedMaterial>
+									<manufacturerOrganization>
+										<name>Westen Pharma GmbH</name>
+									</manufacturerOrganization>
+								</manufacturedProduct>
+							</consumable>
+						</substanceAdministration>
+					</entry>
+					<entry contextConductionInd="true" typeCode="DRIV">
+						<substanceAdministration classCode="SBADM" moodCode="EVN">
+							<templateId root="2.16.840.1.113883.10.20.1.24"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7"/>
+							<templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.3.4"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.1"/>
+							<id root="4263502a-5336-4275-acbb-4f5cba864b4c"/>
+							<code code="Z99.3" codeSystem="1.2.276.0.76.5.388" codeSystemName="icd10gm2011" displayName="erhoehte Blutfette"/>
+							<statusCode code="completed"/>
+							<effectiveTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="IVL_TS">
+								<low value="20120402"/>
+								<high value="20130423"/>
+							</effectiveTime>
+							<effectiveTime operator="A" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="EIVL_TS">
+								<event code="ACM" codeSystem="2.16.840.1.113883.5.139" codeSystemName="TimingEvent" displayName="Vor dem Fruehstueck"/>
+							</effectiveTime>
+							<routeCode code="20053000" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.12" codeSystemName="epSOSRoutesofAdministration" displayName="Orale Verwendung"/>
+							<doseQuantity>
+								<low unit="St." value="0"/>
+								<high unit="St." value="0"/>
+							</doseQuantity>
+							<consumable typeCode="CSM">
+								<manufacturedProduct classCode="MANU">
+									<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.2"/>
+									<templateId root="2.16.840.1.113883.10.20.1.53"/>
+									<manufacturedMaterial classCode="MMAT" determinerCode="KIND">
+										<templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.3.1"/>
+										<code code="1048871" codeSystem="1.2.276.0.76.4.6" codeSystemName="PZN" displayName="SIMVALIP 20 mg Filmtabletten">
+					</code>
+										<name>SIMVALIP 20 mg Filmtabletten</name>
+										<epsos:formCode xmlns:epsos="urn:epsos-org:ep:medication" code="12200" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.2" codeSystemName="epSOS:DoseForm" displayName="Tablette"/>
+										<epsos:asContent xmlns:epsos="urn:epsos-org:ep:medication" classCode="CONT">
+											<epsos:containerPackagedMedicine classCode="CONT" determinerCode="INSTANCE" xmlns:epsos="urn:epsos-org:ep:medication">
+												<epsos:name xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:formCode code="30066000" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.3" codeSystemName="epSOSPackage" displayName="Tablettendose" xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:lotNumberText xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:capacityQuantity unit="St." value="50" xmlns:epsos="urn:epsos-org:ep:medication"/>
+											</epsos:containerPackagedMedicine>
+										</epsos:asContent>
+										<epsos:ingredient xmlns:epsos="urn:epsos-org:ep:medication" classCode="ACTI">
+											<epsos:quantity xmlns:epsos="urn:epsos-org:ep:medication">
+												<epsos:numerator unit="mg" value="20" xmlns:epsos="urn:epsos-org:ep:medication" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="epsos:PQ"/>
+												<epsos:denominator unit="1" value="1" xmlns:epsos="urn:epsos-org:ep:medication" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="epsos:PQ"/>
+											</epsos:quantity>
+											<epsos:ingredient classCode="MMAT" determinerCode="KIND" xmlns:epsos="urn:epsos-org:ep:medication">
+												<epsos:code code="C10AA01" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.24" codeSystemName="ATC" displayName="Simvastatin" xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:name xmlns:epsos="urn:epsos-org:ep:medication"/>
+											</epsos:ingredient>
+										</epsos:ingredient>
+									</manufacturedMaterial>
+									<manufacturerOrganization>
+										<name>Mibe GmbH Arzneimittel</name>
+									</manufacturerOrganization>
+								</manufacturedProduct>
+							</consumable>
+						</substanceAdministration>
+					</entry>
+					<entry contextConductionInd="true" typeCode="DRIV">
+						<substanceAdministration classCode="SBADM" moodCode="EVN">
+							<templateId root="2.16.840.1.113883.10.20.1.24"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7"/>
+							<templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.3.4"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.1"/>
+							<id root="4263502a-5336-4275-acbb-4f5cba864b4c"/>
+							<code code="Z99.3" codeSystem="1.2.276.0.76.5.388" codeSystemName="icd10gm2011" displayName="erhoehte Blutfette"/>
+							<statusCode code="completed"/>
+							<effectiveTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="IVL_TS">
+								<low value="20120402"/>
+								<high value="20130423"/>
+							</effectiveTime>
+							<effectiveTime operator="A" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="EIVL_TS">
+								<event code="ACD" codeSystem="2.16.840.1.113883.5.139" codeSystemName="TimingEvent" displayName="Vor dem Mittagessen"/>
+							</effectiveTime>
+							<routeCode code="20053000" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.12" codeSystemName="epSOSRoutesofAdministration" displayName="Orale Verwendung"/>
+							<doseQuantity>
+								<low unit="St." value="0"/>
+								<high unit="St." value="0"/>
+							</doseQuantity>
+							<consumable typeCode="CSM">
+								<manufacturedProduct classCode="MANU">
+									<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.2"/>
+									<templateId root="2.16.840.1.113883.10.20.1.53"/>
+									<manufacturedMaterial classCode="MMAT" determinerCode="KIND">
+										<templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.3.1"/>
+										<code code="1048871" codeSystem="1.2.276.0.76.4.6" codeSystemName="PZN" displayName="SIMVALIP 20 mg Filmtabletten">
+					</code>
+										<name>SIMVALIP 20 mg Filmtabletten</name>
+										<epsos:formCode xmlns:epsos="urn:epsos-org:ep:medication" code="12200" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.2" codeSystemName="epSOS:DoseForm" displayName="Tablette"/>
+										<epsos:asContent xmlns:epsos="urn:epsos-org:ep:medication" classCode="CONT">
+											<epsos:containerPackagedMedicine classCode="CONT" determinerCode="INSTANCE" xmlns:epsos="urn:epsos-org:ep:medication">
+												<epsos:name xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:formCode code="30066000" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.3" codeSystemName="epSOSPackage" displayName="Tablettendose" xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:lotNumberText xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:capacityQuantity unit="St." value="50" xmlns:epsos="urn:epsos-org:ep:medication"/>
+											</epsos:containerPackagedMedicine>
+										</epsos:asContent>
+										<epsos:ingredient xmlns:epsos="urn:epsos-org:ep:medication" classCode="ACTI">
+											<epsos:quantity xmlns:epsos="urn:epsos-org:ep:medication">
+												<epsos:numerator unit="mg" value="20" xmlns:epsos="urn:epsos-org:ep:medication" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="epsos:PQ"/>
+												<epsos:denominator unit="1" value="1" xmlns:epsos="urn:epsos-org:ep:medication" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="epsos:PQ"/>
+											</epsos:quantity>
+											<epsos:ingredient classCode="MMAT" determinerCode="KIND" xmlns:epsos="urn:epsos-org:ep:medication">
+												<epsos:code code="C10AA01" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.24" codeSystemName="ATC" displayName="Simvastatin" xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:name xmlns:epsos="urn:epsos-org:ep:medication"/>
+											</epsos:ingredient>
+										</epsos:ingredient>
+									</manufacturedMaterial>
+									<manufacturerOrganization>
+										<name>Mibe GmbH Arzneimittel</name>
+									</manufacturerOrganization>
+								</manufacturedProduct>
+							</consumable>
+						</substanceAdministration>
+					</entry>
+					<entry contextConductionInd="true" typeCode="DRIV">
+						<substanceAdministration classCode="SBADM" moodCode="EVN">
+							<templateId root="2.16.840.1.113883.10.20.1.24"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7"/>
+							<templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.3.4"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.1"/>
+							<id root="4263502a-5336-4275-acbb-4f5cba864b4c"/>
+							<code code="Z99.3" codeSystem="1.2.276.0.76.5.388" codeSystemName="icd10gm2011" displayName="erhoehte Blutfette"/>
+							<statusCode code="completed"/>
+							<effectiveTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="IVL_TS">
+								<low value="20120402"/>
+								<high value="20130423"/>
+							</effectiveTime>
+							<effectiveTime operator="A" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="EIVL_TS">
+								<event code="PCV" codeSystem="2.16.840.1.113883.5.139" codeSystemName="TimingEvent" displayName="Nach dem Abendessen"/>
+							</effectiveTime>
+							<routeCode code="20053000" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.12" codeSystemName="epSOSRoutesofAdministration" displayName="Orale Verwendung"/>
+							<doseQuantity>
+								<low unit="St." value="1"/>
+								<high unit="St." value="1"/>
+							</doseQuantity>
+							<consumable typeCode="CSM">
+								<manufacturedProduct classCode="MANU">
+									<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.2"/>
+									<templateId root="2.16.840.1.113883.10.20.1.53"/>
+									<manufacturedMaterial classCode="MMAT" determinerCode="KIND">
+										<templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.3.1"/>
+										<code code="1048871" codeSystem="1.2.276.0.76.4.6" codeSystemName="PZN" displayName="SIMVALIP 20 mg Filmtabletten">
+					</code>
+										<name>SIMVALIP 20 mg Filmtabletten</name>
+										<epsos:formCode xmlns:epsos="urn:epsos-org:ep:medication" code="12200" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.2" codeSystemName="epSOS:DoseForm" displayName="Tablette"/>
+										<epsos:asContent xmlns:epsos="urn:epsos-org:ep:medication" classCode="CONT">
+											<epsos:containerPackagedMedicine classCode="CONT" determinerCode="INSTANCE" xmlns:epsos="urn:epsos-org:ep:medication">
+												<epsos:name xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:formCode code="30066000" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.3" codeSystemName="epSOSPackage" displayName="Tablettendose" xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:lotNumberText xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:capacityQuantity unit="St." value="50" xmlns:epsos="urn:epsos-org:ep:medication"/>
+											</epsos:containerPackagedMedicine>
+										</epsos:asContent>
+										<epsos:ingredient xmlns:epsos="urn:epsos-org:ep:medication" classCode="ACTI">
+											<epsos:quantity xmlns:epsos="urn:epsos-org:ep:medication">
+												<epsos:numerator unit="mg" value="20" xmlns:epsos="urn:epsos-org:ep:medication" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="epsos:PQ"/>
+												<epsos:denominator unit="1" value="1" xmlns:epsos="urn:epsos-org:ep:medication" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="epsos:PQ"/>
+											</epsos:quantity>
+											<epsos:ingredient classCode="MMAT" determinerCode="KIND" xmlns:epsos="urn:epsos-org:ep:medication">
+												<epsos:code code="C10AA01" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.24" codeSystemName="ATC" displayName="Simvastatin" xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:name xmlns:epsos="urn:epsos-org:ep:medication"/>
+											</epsos:ingredient>
+										</epsos:ingredient>
+									</manufacturedMaterial>
+									<manufacturerOrganization>
+										<name>Mibe GmbH Arzneimittel</name>
+									</manufacturerOrganization>
+								</manufacturedProduct>
+							</consumable>
+						</substanceAdministration>
+					</entry>
+					<entry contextConductionInd="true" typeCode="DRIV">
+						<substanceAdministration classCode="SBADM" moodCode="EVN">
+							<templateId root="2.16.840.1.113883.10.20.1.24"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7"/>
+							<templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.3.4"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.1"/>
+							<id root="4263502a-5336-4275-acbb-4f5cba864b4c"/>
+							<code code="Z99.3" codeSystem="1.2.276.0.76.5.388" codeSystemName="icd10gm2011" displayName="erhoehte Blutfette"/>
+							<statusCode code="completed"/>
+							<effectiveTime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="IVL_TS">
+								<low value="20120402"/>
+								<high value="20130423"/>
+							</effectiveTime>
+							<effectiveTime operator="A" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="EIVL_TS">
+								<event code="HS" codeSystem="2.16.840.1.113883.5.139" codeSystemName="TimingEvent" displayName="Vor dem Schlafengehen"/>
+							</effectiveTime>
+							<routeCode code="20053000" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.12" codeSystemName="epSOSRoutesofAdministration" displayName="Orale Verwendung"/>
+							<doseQuantity>
+								<low unit="St." value="0"/>
+								<high unit="St." value="0"/>
+							</doseQuantity>
+							<consumable typeCode="CSM">
+								<manufacturedProduct classCode="MANU">
+									<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.2"/>
+									<templateId root="2.16.840.1.113883.10.20.1.53"/>
+									<manufacturedMaterial classCode="MMAT" determinerCode="KIND">
+										<templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.3.1"/>
+										<code code="1048871" codeSystem="1.2.276.0.76.4.6" codeSystemName="PZN" displayName="SIMVALIP 20 mg Filmtabletten">
+					</code>
+										<name>SIMVALIP 20 mg Filmtabletten</name>
+										<epsos:formCode xmlns:epsos="urn:epsos-org:ep:medication" code="12200" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.2" codeSystemName="epSOS:DoseForm" displayName="Tablette"/>
+										<epsos:asContent xmlns:epsos="urn:epsos-org:ep:medication" classCode="CONT">
+											<epsos:containerPackagedMedicine classCode="CONT" determinerCode="INSTANCE" xmlns:epsos="urn:epsos-org:ep:medication">
+												<epsos:name xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:formCode code="30066000" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.3" codeSystemName="epSOSPackage" displayName="Tablettendose" xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:lotNumberText xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:capacityQuantity unit="St." value="50" xmlns:epsos="urn:epsos-org:ep:medication"/>
+											</epsos:containerPackagedMedicine>
+										</epsos:asContent>
+										<epsos:ingredient xmlns:epsos="urn:epsos-org:ep:medication" classCode="ACTI">
+											<epsos:quantity xmlns:epsos="urn:epsos-org:ep:medication">
+												<epsos:numerator unit="mg" value="20" xmlns:epsos="urn:epsos-org:ep:medication" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="epsos:PQ"/>
+												<epsos:denominator unit="1" value="1" xmlns:epsos="urn:epsos-org:ep:medication" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="epsos:PQ"/>
+											</epsos:quantity>
+											<epsos:ingredient classCode="MMAT" determinerCode="KIND" xmlns:epsos="urn:epsos-org:ep:medication">
+												<epsos:code code="C10AA01" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.42.24" codeSystemName="ATC" displayName="Simvastatin" xmlns:epsos="urn:epsos-org:ep:medication"/>
+												<epsos:name xmlns:epsos="urn:epsos-org:ep:medication"/>
+											</epsos:ingredient>
+										</epsos:ingredient>
+									</manufacturedMaterial>
+									<manufacturerOrganization>
+										<name>Mibe GmbH Arzneimittel</name>
+									</manufacturerOrganization>
+								</manufacturedProduct>
+							</consumable>
+						</substanceAdministration>
+					</entry>
+				</section>
+			</component>
+		</structuredBody>
+	</component>
+</ClinicalDocument>

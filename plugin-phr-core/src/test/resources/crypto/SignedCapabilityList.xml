@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+	<Header xmlns="http://schemas.xmlsoap.org/soap/envelope/" />
+	<soap:Body>
+		<rlus:ListRLUSGenericResponse xmlns:rlus="http://www.omg.org/spec/RLUS/201012/RLUSGeneric">
+			<CapabilityList xmlns="fue-epa:capabilitylist" Id="e8a97671-a971-4dc4-90c0-4c604c9ccc08">
+				<AddressInformation>
+					<wsa:EndpointReference xmlns:epa="http://isst.fhg.de/epa" xmlns:wsa="http://www.w3.org/2005/08/addressing">
+						<wsa:Address>http://isst.fhg.de/epa/records</wsa:Address>
+						<wsa:ReferenceParameters>
+							<epa:AktenID>000000000000000000000002</epa:AktenID>
+						</wsa:ReferenceParameters>
+					</wsa:EndpointReference>
+				</AddressInformation>
+				<SupportedKeys />
+				<SupportedCommunicationPatterns>
+					<SupportedCommunicationPattern Type="fue-epa:patterns:km02" />
+					<SupportedCommunicationPattern Type="fue-epa:patterns:km03" />
+					<SupportedCommunicationPattern Type="fue-epa:patterns:km05" />
+					<SupportedCommunicationPattern Type="fue-epa:patterns:km06" />
+				</SupportedCommunicationPatterns>
+				<SupportedSemanticSignifiers>
+					<rlustypes:RLUSsemantic-signifier xmlns:rlustypes="http://www.omg.org/spec/RLUS/201012/RLUStypes">
+						<rlustypes:name>MedicationSummary</rlustypes:name>
+						<rlustypes:signifierID>MSU</rlustypes:signifierID>
+						<rlustypes:version>1.0</rlustypes:version>
+						<rlustypes:schemaDefName>MSUSSD</rlustypes:schemaDefName>
+						<rlustypes:schemaDefinitionReference>MedicationSummarySemanticSignifierDefinition.xsd</rlustypes:schemaDefinitionReference>
+					</rlustypes:RLUSsemantic-signifier>
+					<rlustypes:RLUSsemantic-signifier xmlns:rlustypes="http://www.omg.org/spec/RLUS/201012/RLUStypes">
+						<rlustypes:name>NursingReport</rlustypes:name>
+						<rlustypes:signifierID>NGR</rlustypes:signifierID>
+						<rlustypes:version>1.0</rlustypes:version>
+						<rlustypes:schemaDefName>NGRSSD</rlustypes:schemaDefName>
+						<rlustypes:schemaDefinitionReference>NursingReportSemanticSignifierDefinition.xsd</rlustypes:schemaDefinitionReference>
+					</rlustypes:RLUSsemantic-signifier>
+				</SupportedSemanticSignifiers>
+				<ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+					<ds:SignedInfo>
+						<ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" />
+						<ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+						<ds:Reference URI="#e8a97671-a971-4dc4-90c0-4c604c9ccc08">
+							<ds:Transforms>
+								<ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+								<ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" />
+							</ds:Transforms>
+							<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+							<ds:DigestValue>gUARzoMx+fYX7k0gG/mRUcKww4Q=</ds:DigestValue>
+						</ds:Reference>
+					</ds:SignedInfo>
+					<ds:SignatureValue>ubqIu+FqF7kGzfNCK1Ukm+94Tdj8mgzK6G/hJNO+qiWD/2br2gkFVg2vAxQPDMiRL3P4FbnS6utQ
+						8OR/8yl3X/Pr4TUbj7nRAzSBcPSkanqklST98EbpOk/0DcZ/xQrMNb6sZNvEy29UVo9HtC4NN5JF
+						Ug8Z/ukM5tPPFQS71+o=
+					</ds:SignatureValue>
+					<ds:KeyInfo>
+						<ds:X509Data>
+							<ds:X509Certificate>MIIDMzCCApygAwIBAgIBATANBgkqhkiG9w0BAQUFADBfMQswCQYDVQQGEwJERTETMBEGA1UEChMK
+								RnJhdW5ob2ZlcjEOMAwGA1UECxMFRk9LVVMxGDAWBgNVBAMTD2VwYS1jb3JlLXN5c3RlbTERMA8G
+								A1UECxMIU2VydmljZXMwHhcNMTMwNjA1MDAwMDAwWhcNMTYxMjMxMjM1OTU5WjBfMQswCQYDVQQG
+								EwJERTETMBEGA1UEChMKRnJhdW5ob2ZlcjEOMAwGA1UECxMFRk9LVVMxGDAWBgNVBAMTD2VwYS1j
+								b3JlLXN5c3RlbTERMA8GA1UECxMIU2VydmljZXMwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGB
+								AL6UGGTC71wZNsp5NiKU7OJExmudaP2UdqF7bQGojqqMPAgh72CSRGiyYvrwLyu5edoEfWXwlFZd
+								BKcTqRLRijBY6+hsZWgKiNBgvz3sXHu+UK71qDT/zLk6sqeTctXBpc6tq4cZ3/+dPAJ1f3/R5ioS
+								CjfsafnbwhRHxZUElddBAgMBAAGjgf4wgfswDAYDVR0TAQH/BAIwADAdBgNVHQ4EFgQUEe1jM2uG
+								FGw1XgSg5Jdh3nC2OWMwgYgGA1UdIwSBgDB+gBQR7WMza4YUbDVeBKDkl2HecLY5Y6FjpGEwXzEL
+								MAkGA1UEBhMCREUxEzARBgNVBAoTCkZyYXVuaG9mZXIxDjAMBgNVBAsTBUZPS1VTMRgwFgYDVQQD
+								Ew9lcGEtY29yZS1zeXN0ZW0xETAPBgNVBAsTCFNlcnZpY2VzggEBMA4GA1UdDwEB/wQEAwIE8DAR
+								BglghkgBhvhCAQEEBAMCBkAwHgYJYIZIAYb4QgENBBEWD3hjYSBjZXJ0aWZpY2F0ZTANBgkqhkiG
+								9w0BAQUFAAOBgQCAFzxL0WAxEE165BtkHN7RYtAV9D9J1+UU/YGZhSAJXudtbmFAn/QjWr6I78Bh
+								EugLzpCrTrPjFEhcjnKuA1xY6TYPncgVtrBoZopkb/LoX0ajNW3QbVIHRme011rzKyivrvEySNZZ
+								XvPztml2KFW1FSoqmFyCmRv/SH9rNgIa8g==
+							</ds:X509Certificate>
+						</ds:X509Data>
+					</ds:KeyInfo>
+				</ds:Signature>
+			</CapabilityList>
+			<rlustypes:RLUSStatusCode xmlns:rlustypes="http://www.omg.org/spec/RLUS/201012/RLUStypes">
+				<rlustypes:success>true</rlustypes:success>
+				<rlustypes:recordID extension="000000000000000000000002" root="1" />
+			</rlustypes:RLUSStatusCode>
+			<rlus:finishedFlag>0</rlus:finishedFlag>
+		</rlus:ListRLUSGenericResponse>
+	</soap:Body>
+</soap:Envelope>

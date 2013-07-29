@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="urn:hl7-org:v3" targetNamespace="urn:hl7-org:v3" elementFormDefault="qualified">
+	<xs:include schemaLocation="HW_POCD_MT000040.xsd" />
+
+	<xs:element name="ClinicalDocument" type="POCD_MT000040.ClinicalDocument" />
+
+	<xs:element name="ServiceProviders" type="ServiceProviders" />
+
+	<xs:element name="serviceProvider" type="POCD_MT000040.AssignedEntity" />
+
+	<xs:complexType name="ServiceProviders">
+		<xs:sequence>
+			<xs:element ref="serviceProvider" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

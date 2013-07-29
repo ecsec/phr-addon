@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="fue-epa:recordkey" xmlns:tns="fue-epa:recordkey" xmlns:xkms="http://www.w3.org/2002/03/xkms#"
+	xmlns:xenc="http://www.w3.org/2001/04/xmlenc#" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" targetNamespace="fue-epa:recordkey" elementFormDefault="qualified"
+	attributeFormDefault="unqualified" version="1.0">
+	<xs:import namespace="http://www.w3.org/2001/04/xmlenc#" schemaLocation="xenc-schema.xsd" />
+	<xs:import namespace="http://www.w3.org/2002/03/xkms#" schemaLocation="xkms.xsd" />
+	<xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd" />
+	<xs:element name="RecordKey" type="tns:RecordKey">
+		<xs:annotation>
+			<xs:documentation>Record Key</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="RecordKey">
+		<xs:sequence>
+			<xs:element name="authenticationCode" type="xs:string" />
+			<xs:element name="SupportedKeys" type="tns:SupportedKeys" />
+			<xs:element name="EncryptedPrivateKey" type="tns:EncryptedPrivateKey" />
+			<xs:element name="CititzenCertificate" type="tns:CititzenCertificate" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SupportedKeys">
+		<xs:sequence>
+			<xs:element ref="xkms:KeyBinding" />
+			<xs:element ref="ds:Signature" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="EncryptedPrivateKey">
+		<xs:sequence>
+			<!-- see Anhang E -->
+			<!-- <xs:element ref="xenc:EncryptedKey" /> -->
+			<xs:any processContents="lax" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						EncryptedKey
+					</xs:documentation>
+				</xs:annotation>
+			</xs:any>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CititzenCertificate">
+		<xs:sequence>
+			<xs:element ref="ds:X509Data" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

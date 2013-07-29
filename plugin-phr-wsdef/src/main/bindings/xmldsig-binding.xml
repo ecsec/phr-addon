@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<jxb:bindings version="1.0" xmlns:jxb="http://java.sun.com/xml/ns/jaxb" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <!-- set the same package name as is wsdef-client -->
+
+  <jxb:bindings schemaLocation="../wsdl/xmldsig-core-schema.xsd" node="/xs:schema">
+         <jxb:schemaBindings>
+             <jxb:package name="org.w3._2000._09.xmldsig_"/>
+         </jxb:schemaBindings>
+  </jxb:bindings>
+
+  <jxb:bindings schemaLocation="../wsdl/xenc-schema.xsd" node="/xs:schema">
+         <jxb:schemaBindings>
+             <jxb:package name="org.w3._2001._04.xmlenc_"/>
+         </jxb:schemaBindings>
+  </jxb:bindings>
+
+</jxb:bindings>

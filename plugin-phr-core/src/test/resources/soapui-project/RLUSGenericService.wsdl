@@ -1,0 +1,619 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" 
+	xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:ns="http://www.omg.org/spec/RLUS/201012/RLUSGeneric" 
+	xmlns:cda="urn:hl7-org:v3"
+	xmlns:RLUStypes="http://www.omg.org/spec/RLUS/201012/RLUStypes"
+	xmlns:pl="http://docs.oasis-open.org/wsbpel/2.0/plnktype" 
+	xmlns:ns1="http://schemas.xmlsoap.org/soap/encoding/"
+	targetNamespace="http://www.omg.org/spec/RLUS/201012/RLUSGeneric">
+	<wsdl:types>
+		<xs:schema attributeFormDefault="qualified"
+			elementFormDefault="qualified" targetNamespace="http://www.omg.org/spec/RLUS/201012/RLUSGeneric">
+			<xs:import namespace="http://www.omg.org/spec/RLUS/201012/RLUStypes"
+				schemaLocation="RLUSTypes.xsd" />
+			<xs:import namespace="urn:hl7-org:v3" schemaLocation="CDA.xsd" />
+			<xs:import namespace="http://www.w3.org/2001/XMLSchema" schemaLocation="XMLSchema.xsd" />
+			<xs:element name="GetRLUSGenericResponse">
+				<xs:annotation>
+					<xs:documentation>
+						Output data from the Get operation
+					</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="xs:any" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>
+									Is multiple instances of an XML document which
+									conforms to the schema for the
+									specific semantic-signifier (such
+									as a list of patients or orders).
+									The schema definition, XML
+									samples and other design details regarding
+									this parameter on a specific
+									semantic-signifier by semantic-signifier
+									basis is defined in Section 9 and 10 of RLUS
+									Specification Version 1.0.1.
+                                </xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="RLUStypes:RLUSStatusCode" minOccurs="1">
+							<xs:annotation>
+								<xs:documentation>
+									Contains exception / result code from the RLUS
+									operations.
+								</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="PutRLUSGenericRequest">
+				<xs:annotation>
+					<xs:documentation>
+						Input data for the Put operations
+					</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="xs:any" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>
+									Is multiple instances of an XML document which
+									conforms to the schema for the
+									specific semantic-signifier (such
+									as a list of patients or orders).
+									The schema definition, XML samples				
+									and other design details regarding
+									this parameter on a specific
+									semantic-signifier by semantic-signifier
+									basis is defined in Section 9 and 10 of RLUS
+									Specification Version 1.0.1.
+                                </xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="RLUStypes:RLUSPutRequestSrcStruct" minOccurs="1">
+							<xs:annotation>
+								<xs:documentation>
+									An XML document schema which contains the
+									semantic-signifier signifier, security, source, and network
+									address context of the caller of the Discard() operation which
+									is necessary tracing data to clean the RLUS and audit logs.
+								</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="writeCommandEnum" minOccurs="1">
+							<xs:annotation>
+								<xs:documentation>
+									Is an enumeration in WSDL / XML which is
+									interpreted either as INSERT OR UPDATE
+                                </xs:documentation>
+							</xs:annotation>
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:enumeration value="UPDATE" />
+									<xs:enumeration value="INSERT" />
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="PutRLUSGenericResponse">
+				<xs:annotation>
+					<xs:documentation>
+						Output data for the Put operations
+					</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="RLUStypes:RLUSStatusCode" minOccurs="1" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="DiscardRLUSGenericRequest">
+				<xs:annotation>
+					<xs:documentation>
+						Input data from the Discard operation
+					</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="RLUStypes:RLUSSearchStruct" minOccurs="1">
+							<xs:annotation>
+								<xs:documentation>
+									An XML document schema for passing the
+									semantic-signifier signifier, search and filter
+									criteria to the semantic-signifier
+									service. See the Section 11.3
+									of RLUS Specification Version 1.0.1
+									for the schema definition, XML
+									samples and other
+									design details regarding this parameter.
+								</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="RLUStypes:RLUSPutRequestSrcStruct"
+							minOccurs="1">
+							<xs:annotation>
+								<xs:documentation>
+									An XML document schema which contains the
+									semantic-signifier signifier, security, source, and
+									network	address context of the caller of the
+									Discard() operation which is necessary tracing
+									data to clean the RLUS and audit logs.
+								</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ListRLUSGenericRequest">
+				<xs:annotation>
+					<xs:documentation>
+						Input data for the List operations
+					</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="RLUStypes:RLUSSearchStruct" minOccurs="1">
+							<xs:annotation>
+								<xs:documentation>
+									An XML document schema for passing the
+									semantic-signifier signifier, search and filter
+									criteria to the
+									semantic-signifier
+									service. See the Section 11.3
+									of RLUS Specification Version 1.0.1
+									for the schema definition, XML
+									samples and other
+									design details regarding this parameter.
+								</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="maxResultStreams" type="xs:unsignedInt"
+							minOccurs="1" />
+						<xs:element name="previousResultID" type="xs:string"
+							minOccurs="1" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ListRLUSGenericResponse">
+				<xs:annotation>
+					<xs:documentation>
+						Outut data for the List operations
+					</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="xs:any" minOccurs="0"
+							maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>
+									Is multiple instances of an XML document which
+									conforms to the schema for the
+									specific semantic-signifier (such
+									as a list of patients or orders).
+									The schema definition, XML
+									samples and other design details regarding
+									this parameter on a specific
+									semantic-signifier by semantic-signifier
+									basis is defined in Section 9 and 10 of RLUS
+									Specification Version 1.0.1.
+                                </xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="RLUStypes:RLUSStatusCode" minOccurs="1">
+							<xs:annotation>
+								<xs:documentation>
+									Contains exception / result code from the RLUS
+									operations.
+								</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="resultID" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>
+									Is the GUID id result token which describes a
+									cookie the underlying implementation
+									can use to match the caller
+									to a following call to List() if the
+									finishedFlag is 0.
+								</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="finishedFlag" type="xs:unsignedInt"
+							minOccurs="1">
+							<xs:annotation>
+								<xs:documentation>
+									Is a numeric identifer that returns 0 if all
+									records in the underlying result set
+									were packaged into a single
+									return of the semantic-signifierXMLRecordsList.
+									If the value is >0, then the List() operation
+									needs to be repeatedly called to
+									extract the rest of the result set
+									until the flag returns 0.
+									The numeric result specifies how many results
+									remain.
+								</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="LocateRLUSGenericRequest">
+				<xs:annotation>
+					<xs:documentation>
+						Input data for the Locate operations
+					</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="RLUStypes:RLUSSearchStruct" minOccurs="1">
+							<xs:annotation>
+								<xs:documentation>
+									An XML document schema for passing the
+									semantic-signifier signifier, search and filter
+									criteria to the	semantic-signifier
+									service. See the Section 11.3
+									of RLUS	Specification Version 1.0.1
+									for the schema definition, XML
+									samples and other
+									design details regarding this parameter.
+								</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="maxResultStreams" type="xs:unsignedInt"
+							minOccurs="1">
+							<xs:annotation>
+								<xs:documentation>
+									Is a parameter which sets the maximum number
+									of return calls to the List() method
+									(i.e. max number of result
+									sets). Such as if a value of 5 was set,
+									then the underlying implementation
+									would break the entire result set into 5
+									streams which could, for example,
+									be represented on 5 web pages.
+								</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="previousResultID" type="xs:string"
+							minOccurs="1">
+							<xs:annotation>
+								<xs:documentation>
+									Is a GUID id result token which describes a
+									cookie that the underlying
+									implementation can use to match the
+									caller to the underlying result set.
+								</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="LocateRLUSGenericResponse">
+				<xs:annotation>
+					<xs:documentation>
+						Output data for the Locate operations
+					</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="RLUStypes:RLUSsemantic-signifierRecordLocationStruct"
+							minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>
+									semantic-signifier signifier name for the
+									search in being executed
+								</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="RLUStypes:RLUSStatusCode" minOccurs="1">
+							<xs:annotation>
+								<xs:documentation>
+									Contains exception / result code from the RLUS
+									operations.
+								</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="resultID" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>
+									Is the GUID id result token which describes a
+									cookie the underlying implementation
+									can use to match the caller
+									to a following call to List() if the
+									finishedFlag is 0.
+								</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="finishedFlag" type="xs:unsignedInt"
+							minOccurs="1">
+							<xs:annotation>
+								<xs:documentation>
+									Is a numeric identifer that returns 0 if all
+									records in the underlying result set
+									were packaged into a single
+									return of the semantic-signifierXMLRecordsList.
+									If the value is >0, then the List()
+									operation needs to be repeatedly called
+									to extract the rest of the result set until the
+									flag returns 0.
+									The numeric result specifies how many results
+									remain.
+								</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="DescribeRLUSGenericResponse">
+				<xs:annotation>
+					<xs:documentation>
+						Output data for the Describe operations
+					</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="RLUStypes:RLUSsemantic-signifier"
+							minOccurs="0" />
+						<xs:element ref="RLUStypes:RLUSStatusCode" minOccurs="1">
+							<xs:annotation>
+								<xs:documentation>
+									Contains exception / result code from the RLUS
+									operations.
+								</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="InitializeRLUSGenericRequest">
+				<xs:annotation>
+					<xs:documentation>
+						Input data for the Initialize operations
+					</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="xs:any" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>
+									semantic-signifier XML record
+								</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element ref="RLUStypes:RLUSInitializeRequestSrcStruct"
+							minOccurs="1" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="semantic-signifierName" type="xs:string" />
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="putRequest">
+		<wsdl:part name="request" element="ns:PutRLUSGenericRequest" />
+	</wsdl:message>
+	<wsdl:message name="putResponse">
+		<wsdl:part name="response" element="RLUStypes:RLUSStatusCode" />
+	</wsdl:message>
+	<wsdl:message name="getRequest">
+		<wsdl:part name="request" element="RLUStypes:RLUSSearchStruct" />
+	</wsdl:message>
+	<wsdl:message name="getResponse">
+		<wsdl:part name="response" element="ns:GetRLUSGenericResponse" />
+	</wsdl:message>
+	<wsdl:message name="discardRequest">
+		<wsdl:part name="request" element="ns:DiscardRLUSGenericRequest" />
+	</wsdl:message>
+	<wsdl:message name="discardResponse">
+		<wsdl:part name="response" element="RLUStypes:RLUSStatusCode" />
+	</wsdl:message>
+	<wsdl:message name="listRequest">
+		<wsdl:part name="request" element="ns:ListRLUSGenericRequest" />
+	</wsdl:message>
+	<wsdl:message name="listResponse">
+		<wsdl:part name="response" element="ns:ListRLUSGenericResponse" />
+	</wsdl:message>
+	<wsdl:message name="locateRequest">
+		<wsdl:part name="request" element="ns:LocateRLUSGenericRequest" />
+	</wsdl:message>
+	<wsdl:message name="locateResponse">
+		<wsdl:part name="response" element="ns:LocateRLUSGenericResponse" />
+	</wsdl:message>
+	<wsdl:message name="describeRequest">
+		<wsdl:part name="request" element="ns:semantic-signifierName" />
+	</wsdl:message>
+	<wsdl:message name="describeResponse">
+		<wsdl:part name="response" element="ns:DescribeRLUSGenericResponse" />
+	</wsdl:message>
+	<wsdl:message name="initializeRequest">
+		<wsdl:part name="request" element="ns:InitializeRLUSGenericRequest" />
+	</wsdl:message>
+	<wsdl:message name="initializeResponse">
+		<wsdl:part name="response" element="RLUStypes:RLUSStatusCode" />
+	</wsdl:message>
+	<wsdl:portType name="RLUSPortType">
+		<wsdl:operation name="get">
+			<wsdl:input message="ns:getRequest" />
+			<wsdl:output message="ns:getResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="put">
+			<wsdl:input message="ns:putRequest" />
+			<wsdl:output message="ns:putResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="discard">
+			<wsdl:input message="ns:discardRequest" />
+			<wsdl:output message="ns:discardResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="list">
+			<wsdl:input message="ns:listRequest" />
+			<wsdl:output message="ns:listResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="locate">
+			<wsdl:input message="ns:locateRequest" />
+			<wsdl:output message="ns:locateResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="describe">
+			<wsdl:input message="ns:describeRequest" />
+			<wsdl:output message="ns:describeResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="initialize">
+			<wsdl:input message="ns:initializeRequest" />
+			<wsdl:output message="ns:initializeResponse" />
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="RLUSGenericSOAPBindingLocal" type="ns:RLUSPortType">
+		<soap:binding style="document"
+			transport="http://www.omg.com/soae/localservice/axis2" />
+		<wsdl:operation name="get">
+			<soap:operation soapAction="urn:get" style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="put">
+			<soap:operation soapAction="urn:put" style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="discard">
+			<soap:operation soapAction="urn:discard" style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="list">
+			<soap:operation soapAction="urn:list" style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="locate">
+			<soap:operation soapAction="urn:locate" style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="describe">
+			<soap:operation soapAction="urn:describe" style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="initialize">
+			<soap:operation soapAction="urn:initialize" style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+
+	<wsdl:binding name="RLUSGenericSOAPBinding" type="ns:RLUSPortType">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="get">
+			<soap:operation soapAction="urn:get" style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="put">
+			<soap:operation soapAction="urn:put" style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="discard">
+			<soap:operation soapAction="urn:discard" style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="list">
+			<soap:operation soapAction="urn:list" style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="locate">
+			<soap:operation soapAction="urn:locate" style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="describe">
+			<soap:operation soapAction="urn:describe" style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="initialize">
+			<soap:operation soapAction="urn:initialize" style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="RLUSGenericService">
+		<wsdl:port name="RLUSGenericServicePortLocal" binding="ns:RLUSGenericSOAPBindingLocal">
+			<soap:address
+				location="http://axis2?application=app-1&amp;package=packageName&amp;service=RLUSGenericService" />
+		</wsdl:port>
+		<wsdl:port name="RLUSGenericServicePort" binding="ns:RLUSGenericSOAPBinding">
+			<soap:address location="http://localhost:8088/axis2/services/RLUSGenericService" />
+		</wsdl:port>
+	</wsdl:service>
+	<pl:partnerLinkType name="RLUSGenericPLType">
+		<pl:role name="RLUSGenericRole" portType="ns:RLUSGenericPortType" />
+	</pl:partnerLinkType>
+</wsdl:definitions>

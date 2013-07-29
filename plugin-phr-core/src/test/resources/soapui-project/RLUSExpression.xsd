@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:RLUSexp="http://www.omg.org/spec/RLUS/201012/RLUSexpression" 
+	targetNamespace="http://www.omg.org/spec/RLUS/201012/RLUSexpression" elementFormDefault="qualified">
+	<xs:complexType name="ExpressionType">
+		<xs:choice>
+			<!-- general expression -->
+			<xs:sequence>
+				<xs:choice>
+					<xs:element name="BinaryTerm" type="RLUSexp:TermType"/>
+					<xs:element name="BinaryExpression" type="RLUSexp:ExpressionType"/>
+				</xs:choice>
+				<xs:element name="Operator" type="RLUSexp:SimpleOperatorType"/>
+				<xs:choice>
+					<xs:element name="BinaryTerm" type="RLUSexp:TermType"/>
+					<xs:element name="BinaryExpression" type="RLUSexp:ExpressionType"/>
+				</xs:choice>
+			</xs:sequence>
+			<!-- prefix unary expression -->
+			<xs:sequence>
+				<xs:element name="PrefixUnaryOperator" type="RLUSexp:PrefixUnaryOperatorType"/>
+				<xs:choice>
+					<xs:element name="PrefixTerm" type="RLUSexp:TermType"/>
+					<xs:element name="PrefixExpression" type="RLUSexp:ExpressionType"/>
+				</xs:choice>
+			</xs:sequence>
+			<!-- postfix unary expression -->
+			<xs:sequence>
+				<xs:choice>
+					<xs:element name="PostfixTerm" type="RLUSexp:TermType"/>
+					<xs:element name="PostfixExpression" type="RLUSexp:ExpressionType"/>
+				</xs:choice>
+				<xs:element name="PostfixUnaryOperator" type="RLUSexp:PostfixUnaryOperatorType"/>
+			</xs:sequence>
+			<!-- between expression -->
+			<xs:sequence>
+				<xs:choice>
+					<xs:element name="BetweenTerm" type="RLUSexp:TermType"/>
+					<xs:element name="BetweenExpression" type="RLUSexp:ExpressionType"/>
+				</xs:choice>
+				<xs:element name="Between"/>
+				<xs:choice>
+					<xs:element name="BetweenTerm" type="RLUSexp:TermType"/>
+					<xs:element name="BetweenExpression" type="RLUSexp:ExpressionType"/>
+				</xs:choice>
+				<xs:element name="And"/>
+				<xs:choice>
+					<xs:element name="BetweenTerm" type="RLUSexp:TermType"/>
+					<xs:element name="BetweenExpression" type="RLUSexp:ExpressionType"/>
+				</xs:choice>
+			</xs:sequence>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="SimpleOperatorType">
+		<xs:attribute name="type" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="Plus"/>
+					<xs:enumeration value="Minus"/>
+					<xs:enumeration value="Multiply"/>
+					<xs:enumeration value="Divide"/>
+					<xs:enumeration value="Modulus"/>
+					<xs:enumeration value="LessThan"/>
+					<xs:enumeration value="GreaterThan"/>
+					<xs:enumeration value="LessEqual"/>
+					<xs:enumeration value="GreaterEqual"/>
+					<xs:enumeration value="EqualTo"/>
+					<xs:enumeration value="NotEqualTo"/>
+					<xs:enumeration value="Like"/>
+					<xs:enumeration value="In"/>
+					<xs:enumeration value="And"/>
+					<xs:enumeration value="Or"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="PrefixUnaryOperatorType">
+		<xs:attribute name="type" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="Not"/>
+					<xs:enumeration value="Plus"/>
+					<xs:enumeration value="Minus"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="PostfixUnaryOperatorType">
+		<xs:attribute name="type" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="IsNull"/>
+					<xs:enumeration value="IsNotNull"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="TermType">
+		<xs:attribute name="text" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:minLength value="1"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="type" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="Text"/>
+					<xs:enumeration value="Other"/>
+					<xs:enumeration value="Numeric"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+</xs:schema>

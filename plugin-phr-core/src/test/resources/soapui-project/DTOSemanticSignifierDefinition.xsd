@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://isst.fraunhofer.de/rlus/types" xmlns:rlus="urn:RLUStypes.hssp.com" targetNamespace="http://isst.fraunhofer.de/rlus/types" elementFormDefault="qualified" attributeFormDefault="qualified" version="1.0">
+	<xs:import namespace="urn:RLUStypes.hssp.com" schemaLocation="RLUSTypes.xsd"/>
+	<!-- elements to be used in service messages -->
+	<xs:element name="RequestObject" type="tns:RequestObject">
+		<xs:annotation>
+			<xs:documentation>
+				Semantic Signifier for expressing administrative
+				metadata for a request object.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ProvisioningObject" type="tns:ProvisioningObject">
+		<xs:annotation>
+			<xs:documentation>
+				Semantic Signifier for expressing administrative
+				metadata for a provisioning object.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- type defintions of the elements above -->
+	<xs:complexType name="InformationObject" abstract="true">
+		<xs:sequence>
+			<xs:element ref="rlus:RLUSSearchStruct" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+                  Use this element to restrict the request by
+                  using
+                  expressions. In the expression based scenario, filter
+                  criteria, and
+                  search attributes need to be properly formed for
+                  the retrieval to
+                  operate successfully.
+                     </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AdditionalRequestInformation" type="xs:anyType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+                  Is multiple instances of an XML document which
+                  conforms to the schema for the specific semantic-signifier.
+                  Additional information for the fullfillment of the request might
+                  be passed as a separate XML document.
+                        </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Repetition" type="xs:anyType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+                  Is multiple instances of an XML document which
+                  conforms to the schema for the specific semantic-signifier.
+                  Additional information for the repetition of the response
+                  according to this request might be passed as a separate XML
+                  document. This might be a schedule.
+         </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="RecordTarget" type="tns:RecordTarget" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						Addressing information of the underlying resource.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CreationTime" type="xs:dateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					Timestamp of the information object's creation.
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="InvalidityTime" type="xs:dateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					Timestamp when information object becomes invalid.
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Participants" type="tns:Participant" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>
+					Addressing information of participants that communicate via information objects. 
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Systems" type="tns:System" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>
+						Addressing information of participating systems that send/receive information objects. 
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Content" type="xs:anyType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						Placeholder for content that this informtion object encapsules.
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="identifier" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>
+               Alphanumeric identifier which uniquely identifies
+               this data
+               transfer object.
+            </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="reference" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>
+					Alphanumeric identifier which refers to another information object.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="semantic-signifier-name" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>
+					The semantic signifier which describes the content.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="RequestObject">
+		<xs:complexContent>
+			<xs:restriction base="tns:InformationObject">
+				<xs:sequence>
+					<xs:element ref="rlus:RLUSSearchStruct"/>
+					<xs:element name="AdditionalRequestInformation" type="xs:anyType" minOccurs="0"/>
+					<xs:element name="Repetition" type="xs:anyType" minOccurs="0"/>
+					<xs:element name="RecordTarget" type="tns:RecordTarget"/>
+					<xs:element name="CreationTime" type="xs:dateTime"/>
+					<xs:element name="InvalidityTime" type="xs:dateTime"/>
+					<xs:element name="Participants" type="tns:Participant" maxOccurs="unbounded"/>
+					<xs:element name="Systems" type="tns:System"  maxOccurs="unbounded"/>
+				</xs:sequence>
+				<xs:attribute name="identifier" type="xs:string" use="required"/>
+			</xs:restriction>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ProvisioningObject">
+		<xs:complexContent>
+			<xs:restriction base="tns:InformationObject">
+				<xs:sequence>
+					<xs:element name="RecordTarget" type="tns:RecordTarget"/>
+					<xs:element name="CreationTime" type="xs:dateTime"/>
+					<xs:element name="Participants" type="tns:Participant" maxOccurs="unbounded"/>
+					<xs:element name="Systems" type="tns:System" maxOccurs="unbounded"/>
+					<xs:element name="Content" type="xs:anyType"/>
+				</xs:sequence>
+				<xs:attribute name="identifier" type="xs:string" use="required"/>
+				<xs:attribute name="reference" type="xs:string" use="optional"/>
+				<xs:attribute name="semantic-signifier-name" type="xs:string" use="optional"/>
+			</xs:restriction>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Participant">
+		<xs:sequence>
+			<xs:element name="Id" type="xs:string"/>
+		</xs:sequence>
+		<xs:attribute name="ParticipantTypeCode" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="1">
+						<xs:annotation>
+							<xs:appinfo>Person</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="2">
+						<xs:annotation>
+							<xs:appinfo>Organization</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="3">
+						<xs:annotation>
+							<xs:appinfo>System object</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="4">
+						<xs:annotation>
+							<xs:appinfo>Other</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="RoleTypeCode" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="1">
+						<xs:annotation>
+							<xs:appinfo>Originator</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="2">
+						<xs:annotation>
+							<xs:appinfo>Recipient</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="System">
+		<xs:annotation>
+			<xs:documentation>
+				Identifier which uniquely identifies
+				the system and its associated CBR.               
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Id" type="xs:string"/>
+			<xs:element name="CBRContext" type="tns:CBRContext" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="SystemTypeCode" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="1">
+						<xs:annotation>
+							<xs:appinfo>Source</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="2">
+						<xs:annotation>
+							<xs:appinfo>Target</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="3">
+						<xs:annotation>
+							<xs:appinfo>ReplyTo</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="4">
+						<xs:annotation>
+							<xs:appinfo>Other</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="RecordTarget">		
+		<xs:sequence>
+			<xs:element name="RecordId" type="xs:anyType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CBRContext">
+		<xs:annotation>
+			<xs:documentation>
+				Make use of the CBRContext defined in RLUS types.
+				Since the CBRContext is not defined as a type, we copy the
+				definition from RLUS types.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="CBRName" type="xs:string"/>
+			<xs:element name="NetworkName" type="xs:string"/>
+			<xs:element name="NetworkAddress" type="xs:NMTOKEN"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

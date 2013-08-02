@@ -22,30 +22,17 @@
 
 package org.openecard.plugins.ws;
 
-import de.fraunhofer.isst.rlus.types.Participant;
-import de.fraunhofer.isst.rlus.types.ProvisioningObject;
-import de.fraunhofer.isst.rlus.types.RecordTarget;
-import de.fraunhofer.isst.rlus.types.RequestObject;
-import fue_epa.capabilitylist.AddressInformation;
-import fue_epa.capabilitylist.CapabilityList;
-import fue_epa.capabilitylist.SupportedCommunicationPattern;
-import fue_epa.capabilitylist.SupportedCommunicationPatterns;
-import fue_epa.capabilitylist.SupportedKeys;
-import fue_epa.capabilitylist.SupportedSemanticSignifiers;
-import fue_epa.recordkey.RecordKey;
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
-import java.io.UnsupportedEncodingException;
+import java.io.StringWriter;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
@@ -104,6 +91,17 @@ import org.xml.sax.SAXException;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
+import de.fraunhofer.isst.rlus.types.Participant;
+import de.fraunhofer.isst.rlus.types.ProvisioningObject;
+import de.fraunhofer.isst.rlus.types.RecordTarget;
+import de.fraunhofer.isst.rlus.types.RequestObject;
+import fue_epa.capabilitylist.AddressInformation;
+import fue_epa.capabilitylist.CapabilityList;
+import fue_epa.capabilitylist.SupportedCommunicationPattern;
+import fue_epa.capabilitylist.SupportedCommunicationPatterns;
+import fue_epa.capabilitylist.SupportedKeys;
+import fue_epa.capabilitylist.SupportedSemanticSignifiers;
+import fue_epa.recordkey.RecordKey;
 
 
 /**
@@ -117,29 +115,16 @@ public class PHRMarshaller implements WSMarshaller {
 
     private DocumentBuilderFactory documentBuilderFactory;
     private DocumentBuilder documentBuilder;
-    private Transformer transformer;
     private MessageFactory soapFactory;
 
     public PHRMarshaller() {
 	documentBuilderFactory = null;
 	documentBuilder = null;
-	transformer = null;
 	soapFactory = null;
 	try {
 	    documentBuilderFactory = DocumentBuilderFactory.newInstance();
 	    documentBuilderFactory.setNamespaceAware(true);
-	    documentBuilderFactory.setIgnoringComments(true);
 	    documentBuilder = documentBuilderFactory.newDocumentBuilder();
-	    TransformerFactory transformerFactory = TransformerFactory.newInstance();
-	    transformer = transformerFactory.newTransformer();
-	    transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-	    transformer.setOutputProperty(OutputKeys.STANDALONE, "yes");
-	    // transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION,
-	    // "yes");
-	    transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
-
-	    transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
-
 	    soapFactory = MessageFactory.newInstance();
 	} catch (Exception ex) {
 	    ex.printStackTrace(System.err);
@@ -161,15 +146,16 @@ public class PHRMarshaller implements WSMarshaller {
 
     @Override
     public synchronized String doc2str(Node doc) throws TransformerException {
-	ByteArrayOutputStream out = new ByteArrayOutputStream();
-	transformer.transform(new DOMSource(doc), new StreamResult(out));
-	String result;
-	try {
-	    result = out.toString("UTF-8");
-	} catch (UnsupportedEncodingException ex) {
-	    throw new TransformerException(ex);
-	}
-	return result;
+	TransformerFactory transfac = TransformerFactory.newInstance();
+	Transformer trans = transfac.newTransformer();
+
+	StringWriter sw = new StringWriter();
+	StreamResult result = new StreamResult(sw);
+	DOMSource source = new DOMSource(doc);
+	trans.transform(source, result);
+	String xmlString = sw.toString();
+
+	return xmlString;
     }
 
     @Override
@@ -374,8 +360,9 @@ public class PHRMarshaller implements WSMarshaller {
 	Element elemSignedInfo = document.createElement("ds:" + "SignedInfo");
 	try {
 	    Element elemCanonicalizationMethod = document.createElement("ds:" + "CanonicalizationMethod");
-	    elemCanonicalizationMethod.setAttribute("Algorithm", signature.getSignedInfo().getCanonicalizationMethod()
-		    .getAlgorithm());
+	    CanonicalizationMethodType canonicalizationMethod = signature.getSignedInfo().getCanonicalizationMethod();
+	    String algorithm = canonicalizationMethod.getAlgorithm();
+	    elemCanonicalizationMethod.setAttribute("Algorithm", algorithm);
 	    elemSignedInfo.appendChild(elemCanonicalizationMethod);
 	} catch (NullPointerException e) {
 	    e.printStackTrace();
@@ -469,8 +456,21 @@ public class PHRMarshaller implements WSMarshaller {
 	    StringReader strReader = new StringReader(docStr);
 	    InputSource inSrc = new InputSource(strReader);
 	    Document doc = documentBuilder.parse(inSrc);
+	    return doc;
+	} catch (IOException ex) {
+	    throw new SAXException(ex);
+	}
+    }
 
-	    WhitespaceFilter.filter(doc);
+    public synchronized Document str2doc(String docStr, boolean filterWhitespaces) throws SAXException {
+	try {
+	    // read dom as w3
+	    StringReader strReader = new StringReader(docStr);
+	    InputSource inSrc = new InputSource(strReader);
+	    Document doc = documentBuilder.parse(inSrc);
+	    if (filterWhitespaces) {
+		WhitespaceFilter.filter(doc);
+	    }
 	    return doc;
 	} catch (IOException ex) {
 	    throw new SAXException(ex);
@@ -483,7 +483,6 @@ public class PHRMarshaller implements WSMarshaller {
 	Document doc;
 	try {
 	    doc = documentBuilder.parse(docStr);
-	    WhitespaceFilter.filter(doc);
 	    return doc;
 	} catch (IOException e) {
 	    throw new SAXException(e);

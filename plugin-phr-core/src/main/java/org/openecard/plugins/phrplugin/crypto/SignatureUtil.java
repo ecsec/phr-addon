@@ -132,11 +132,15 @@ public class SignatureUtil {
 	    XMLSignature sig = new XMLSignature(doc, "", XMLSignature.ALGO_ID_SIGNATURE_RSA,
 		    Transforms.TRANSFORM_C14N_EXCL_OMIT_COMMENTS);
 	    doc.getDocumentElement().appendChild(sig.getElement());
+	    setId(doc);
 	    Transforms transforms = new Transforms(doc);
 	    transforms.addTransform(Transforms.TRANSFORM_ENVELOPED_SIGNATURE);
 	    transforms.addTransform(Transforms.TRANSFORM_C14N_EXCL_OMIT_COMMENTS);
-
-	    sig.addDocument("", transforms, Constants.ALGO_ID_DIGEST_SHA1);
+	    String attribute = element.getAttribute("Id");
+	    if (attribute == null) {
+		attribute = element.getAttribute("ID");
+	    }
+	    sig.addDocument("#" + attribute, transforms, Constants.ALGO_ID_DIGEST_SHA1);
 
 	    sig.addKeyInfo(cert);
 	    sig.addKeyInfo(cert.getPublicKey());
@@ -213,7 +217,6 @@ public class SignatureUtil {
 	    setId(doc.getDocumentElement());
 
 	    XMLSignature signature = new XMLSignature(sigElement, "");
-
 	    for (int i = 0; i < signature.getSignedInfo().getLength(); i++) {
 		org.apache.xml.security.signature.Reference r = signature.getSignedInfo().item(i);
 		logger.debug("Found a reference for URI: '" + r.getURI() + "'");
@@ -299,6 +302,8 @@ public class SignatureUtil {
 	    for (int i = 0; i < n.getChildNodes().getLength(); i++) {
 		setId(n.getChildNodes().item(i));
 	    }
+	} else if(n instanceof Document) {
+	    setId(((Document) n).getDocumentElement());
 	}
     }
 

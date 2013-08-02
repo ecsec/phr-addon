@@ -129,7 +129,7 @@ public final class TestClient {
 	ClasspathRegistry.getInstance().register((AddonBundleDescription) marshaller.unmarshal(manifestDoc));
 
 	HTTPBinding binding = new HTTPBinding(HTTPBinding.DEFAULT_PORT);
-	binding.setAddonManager(new AddonManager(dispatcher, gui, cardStates, recognition));
+	binding.setAddonManager(AddonManager.createInstance(dispatcher, gui, cardStates, recognition, em, sal.getProtocolInfo()));
 	ControlHandlers handler = new ControlHandlers();
 
 	handler.addControlHandler(new DefaultHandler());

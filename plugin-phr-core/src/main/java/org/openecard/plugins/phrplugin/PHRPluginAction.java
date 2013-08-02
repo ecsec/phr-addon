@@ -50,6 +50,8 @@ import java.security.spec.RSAPublicKeySpec;
 import java.util.List;
 import java.util.Map;
 import java.util.zip.GZIPInputStream;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
@@ -101,7 +103,6 @@ import org.openecard.plugins.phrplugin.soap.SOAP;
 import org.openecard.plugins.ws.PHRMarshaller;
 import org.openecard.recognition.CardRecognition;
 import org.openecard.ws.marshal.MarshallingTypeException;
-import org.openecard.ws.marshal.WSMarshaller;
 import org.openecard.ws.marshal.WSMarshallerException;
 import org.openecard.ws.soap.SOAPException;
 import org.slf4j.Logger;
@@ -112,6 +113,7 @@ import org.w3._2000._09.xmldsig_.RSAKeyValueType;
 import org.w3._2002._03.xkms.KeyBindingType;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 
 
@@ -137,7 +139,7 @@ public class PHRPluginAction implements AppPluginAction {
     private CardRecognition rec;
     private UserConsent gui;
     private CardStateMap map;
-    private WSMarshaller m;
+    private PHRMarshaller m;
     Document assertion;
 
     @Override
@@ -305,7 +307,8 @@ public class PHRPluginAction implements AppPluginAction {
 	    return bindingResult;
 	}
 	if (requestBody != null) {
-	    String decode = URLDecoder.decode(new String(requestBody.getValue()).substring(19));
+	    Document d = (Document) requestBody.getValue();
+	    String decode = URLDecoder.decode(d.getFirstChild().getFirstChild().getNodeValue().substring(19));
 	    if (encoding != null && encoding.equalsIgnoreCase("base64")) {
 		requestBodyValue = Base64.decode(decode);
 	    } else {
@@ -414,7 +417,7 @@ public class PHRPluginAction implements AppPluginAction {
 	Document responseDoc;
 	try {
 	    Element content = (Element) listRLUSGenericResponse.getAny().get(0);
-	    Document superEncMdo = m.str2doc(m.doc2str(content));
+	    Document superEncMdo = m.str2doc(m.doc2str(content), true);
 	    logger.debug("Starting with decryption of information object.");
 	    CardCrypto cardCrypto = new CardCrypto(dispatcher, cHandle);
 	    responseDoc = cardCrypto.superDecryptMDO(superEncMdo);
@@ -439,6 +442,7 @@ public class PHRPluginAction implements AppPluginAction {
 
 	if (output != null && output.equalsIgnoreCase(XHTML)) {
 	    String xhtml = transformToXHTML(responseDoc);
+	    xhtml = xhtml.replace("<META http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">", "<META http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"/>");
 	    if (xhtml != null) {
 		responseBodyValue = xhtml.getBytes();
 		responseBodyMimeType = MimeType.TEXT_HTML.getMimeType();
@@ -452,7 +456,18 @@ public class PHRPluginAction implements AppPluginAction {
 	    responseBodyValue = Base64.encode(responseBodyValue);
 	}
 	BindingResult bindingResult = new BindingResult(BindingResultCode.OK);
-	bindingResult.setBody(new Body(responseBodyValue, responseBodyMimeType));
+	try {
+	    DocumentBuilderFactory fac = DocumentBuilderFactory.newInstance();
+	    DocumentBuilder builder = fac.newDocumentBuilder();
+	    Document d = builder.newDocument();
+	    Node e = d.createElement("base64Content");
+	    e.appendChild(d.createTextNode(new String(responseBodyValue)));
+	    d.appendChild(e);
+	    bindingResult.setBody(new Body(d, responseBodyMimeType));
+	} catch (ParserConfigurationException e1) {
+	    // TODO Auto-generated catch block
+	    e1.printStackTrace();
+	}
 	return bindingResult;
     }
 
@@ -563,9 +578,15 @@ public class PHRPluginAction implements AppPluginAction {
 	    while ((len = gzis.read(buffer)) != -1) {
 		out.write(buffer, 0, len);
 	    }
-	    body = new Body(out.toByteArray(), MimeType.TEXT_XML.getMimeType());
+	    String docStr = new String(out.toByteArray(), "iso-8859-15");
+	    docStr = docStr.replace("ISO-8859-15", "UTF-8");
+	    body = new Body(m.str2doc(docStr), MimeType.TEXT_XML.getMimeType());
 	} catch (IOException e) {
 	    String msg = "Unzipping of EF.PD failed.";
+	    logger.error(msg, e);
+	    return createInternalErrorResult(msg);
+	} catch (SAXException e) {
+	    String msg = "Creation of response body failed.";
 	    logger.error(msg, e);
 	    return createInternalErrorResult(msg);
 	}

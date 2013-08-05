@@ -34,7 +34,8 @@ public enum ActionEnum {
     INITIALIZE("initialize"), 
     GETINFORMATIONOBJECT("getInformationObject"), 
     PUTINFORMATIONOBJECT("putInformationObject"),
-    GETPD("getPD");
+    GETPD("getPD"),
+    GETSSS("getSSS");
 
     private final String text;
 

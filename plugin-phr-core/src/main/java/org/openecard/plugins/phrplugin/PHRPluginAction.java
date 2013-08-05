@@ -198,10 +198,43 @@ public class PHRPluginAction implements AppPluginAction {
 		    createSignedSAMLAssertion(parameters, cHandle, efVerweis);
 		}
 		return putInformationObject(cHandle, parameters, requestBody);
+	    case GETSSS:
+		return getSupportedSemanticSignifiers(cHandle, parameters);
 	    default:
 		// should never happen
 		return createInternalErrorResult("This code part should be unreachable.");
 	}
+    }
+
+    private BindingResult getSupportedSemanticSignifiers(ConnectionHandleType cHandle, Map<String, String> parameters) {
+	Pair<EFVerweis, ConnectionHandleType> efVerweis = readEFVerweis(cHandle);
+	String output = parameters.get("output");
+	String encoding = parameters.get("encoding");
+	if (efVerweis == null) {
+	    return createInternalErrorResult("Reading EF.Verweis failed.");
+	}
+	cHandle = efVerweis.p2;
+	String providerID = ByteUtils.toHexString(efVerweis.p1.getProviderID(), false);
+	String recordID = ByteUtils.toHexString(efVerweis.p1.getRecordID(), false);
+	SOAP soap = setUpSoapConnection(providerID, recordID, cHandle);
+	if (soap == null) {
+	    return createInternalErrorResult("Setup of soap connection failed.");
+	}
+	CapabilityList capabilityList = getCapabilityList(soap, recordID);
+	if (capabilityList == null) {
+	    return createInternalErrorResult("Could not receive CapabilityList via SOAP.");
+	}
+	BindingResult result = new BindingResult(BindingResultCode.OK);
+	Node node;
+	try {
+	    node = m.marshal(capabilityList.getSupportedSemanticSignifiers());
+	} catch (MarshallingTypeException e) {
+	    String msg = "Could not marshal SupportedSematicSignifiers.";
+	    logger.error(msg, e);
+	    return createInternalErrorResult(msg);
+	}
+	result.setBody(new Body(node, MimeType.TEXT_XML.toString()));
+	return result;
     }
 
     private void createSignedSAMLAssertion(Map<String, String> parameters, ConnectionHandleType cHandle,
@@ -442,6 +475,7 @@ public class PHRPluginAction implements AppPluginAction {
 
 	if (output != null && output.equalsIgnoreCase(XHTML)) {
 	    String xhtml = transformToXHTML(responseDoc);
+	    // fix meta tag 
 	    xhtml = xhtml.replace("<META http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">", "<META http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"/>");
 	    if (xhtml != null) {
 		responseBodyValue = xhtml.getBytes();
@@ -464,9 +498,10 @@ public class PHRPluginAction implements AppPluginAction {
 	    e.appendChild(d.createTextNode(new String(responseBodyValue)));
 	    d.appendChild(e);
 	    bindingResult.setBody(new Body(d, responseBodyMimeType));
-	} catch (ParserConfigurationException e1) {
-	    // TODO Auto-generated catch block
-	    e1.printStackTrace();
+	} catch (ParserConfigurationException e) {
+	    String msg = "Failed to create response body";
+	    logger.error(msg, e);
+	    return createInternalErrorResult(msg);
 	}
 	return bindingResult;
     }

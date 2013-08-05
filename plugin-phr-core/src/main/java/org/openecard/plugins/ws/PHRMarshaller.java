@@ -286,6 +286,30 @@ public class PHRMarshaller implements WSMarshaller {
 	    rootElement = (Element) marshalRecordKey((RecordKey) o, document);
 	} else if (o instanceof SignatureType) {
 	    rootElement = marshalSignatureType(document, (SignatureType) o);
+	} else if (o instanceof SupportedSemanticSignifiers) {
+	    SupportedSemanticSignifiers sss = (SupportedSemanticSignifiers) o;
+	    rootElement = document.createElement("SupportedSemanticSignifiers");
+	    rootElement.setAttribute("xmlns", "fue-epa:capabilitylist");
+	    for (RLUSsemanticSignifier signifier : sss.getRLUSsemanticSignifier()) {
+		Element elementSignifier = document.createElement("RLUSsemantic-signifier");
+		elementSignifier.setAttribute("xmlns", "http://www.omg.org/spec/RLUS/201012/RLUStypes");
+		rootElement.appendChild(elementSignifier);
+		Element elemName = document.createElement("name");
+		elemName.setTextContent(signifier.getName());
+		elementSignifier.appendChild(elemName);
+		Element elemSignifierID = document.createElement("signifierID");
+		elemSignifierID.setTextContent(signifier.getSignifierID());
+		elementSignifier.appendChild(elemSignifierID);
+		Element elemVersion = document.createElement("name");
+		elemVersion.setTextContent(signifier.getVersion());
+		elementSignifier.appendChild(elemVersion);
+		Element elemschemaDefName = document.createElement("name");
+		elemschemaDefName.setTextContent(signifier.getSchemaDefName());
+		elementSignifier.appendChild(elemschemaDefName);
+		Element elemschemaDefinitionReference = document.createElement("name");
+		elemschemaDefinitionReference.setTextContent(signifier.getSchemaDefintionReference());
+		elementSignifier.appendChild(elemschemaDefinitionReference);
+	    }
 	} else {
 	    throw new IllegalArgumentException("Cannot marshal " + o.getClass().getSimpleName());
 	}

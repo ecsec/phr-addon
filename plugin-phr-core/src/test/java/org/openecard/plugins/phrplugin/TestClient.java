@@ -26,7 +26,7 @@ import iso.std.iso_iec._24727.tech.schema.EstablishContext;
 import java.io.InputStream;
 import org.openecard.addon.AddonManager;
 import org.openecard.addon.ClasspathRegistry;
-import org.openecard.addon.manifest.AddonBundleDescription;
+import org.openecard.addon.manifest.AddonSpecification;
 import org.openecard.common.ClientEnv;
 import org.openecard.common.ECardConstants;
 import org.openecard.common.sal.state.CardStateMap;
@@ -123,10 +123,10 @@ public final class TestClient {
 	em.initialize();
 
 	WSMarshaller marshaller = WSMarshallerFactory.createInstance();
-	marshaller.addXmlTypeClass(AddonBundleDescription.class);
+	marshaller.addXmlTypeClass(AddonSpecification.class);
 	InputStream manifestStream = FileUtils.resolveResourceAsStream(PHRPluginAction.class, "PHRPlugin-Manifest.xml");
 	Document manifestDoc = marshaller.str2doc(manifestStream);
-	ClasspathRegistry.getInstance().register((AddonBundleDescription) marshaller.unmarshal(manifestDoc));
+	ClasspathRegistry.getInstance().register((AddonSpecification) marshaller.unmarshal(manifestDoc));
 
 	HTTPBinding binding = new HTTPBinding(HTTPBinding.DEFAULT_PORT);
 	binding.setAddonManager(AddonManager.createInstance(dispatcher, gui, cardStates, recognition, em, sal.getProtocolInfo()));

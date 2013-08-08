@@ -158,7 +158,7 @@ public class PHRPluginAction implements AppPluginAction {
     }
 
     @Override
-    public BindingResult execute(Body requestBody, Map<String, String> parameters, Attachment attachments) {
+    public BindingResult execute(Body requestBody, Map<String, String> parameters, List<Attachment> attachments) {
 	String actionParm = parameters.get("action");
 	if (actionParm == null) {
 	    BindingResult bindingResult = new BindingResult(BindingResultCode.MISSING_PARAMETER);

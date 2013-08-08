@@ -96,12 +96,12 @@ public class SignatureUtilTest {
 	KeyStore keyStore = KeyStore.getInstance("PKCS12");
 	PHRPluginProperies.loadProperties();
 	InputStream fis2 = FileUtils.resolveResourceAsStream(PHRPluginAction.class,
-		PHRPluginProperies.getProperty("cert_file"));
-	char[] password = PHRPluginProperies.getProperty("cert_pw").toCharArray();
+		"ID4Health_EPA-Client_SSL.p12");
+	char[] password = "test123.".toCharArray();
 	keyStore.load(fis2, password);
 	fis2.close();
 	KeyStore.PasswordProtection param = new KeyStore.PasswordProtection(password);
-	String alias = PHRPluginProperies.getProperty("cert_alias");
+	String alias = "id4health epa-client ssl";
 	KeyStore.PrivateKeyEntry pkEntry = (KeyStore.PrivateKeyEntry) keyStore.getEntry(
 		alias, param);
 	PrivateKey myPrivateKey = pkEntry.getPrivateKey();

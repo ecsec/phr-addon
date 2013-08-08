@@ -90,7 +90,7 @@ public class TestTlsServer extends DefaultTlsServer {
 
     @Override
     public CertificateRequest getCertificateRequest() {
-	return new CertificateRequest(new short[] { ClientCertificateType.rsa_sign }, null, null);
+	return new CertificateRequest(new short[] { ClientCertificateType.rsa_sign }, null);
     }
 
     @Override

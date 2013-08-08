@@ -4,6 +4,12 @@
 	 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+	<groupId>org.openecard</groupId>
+	<artifactId>app</artifactId>
+	<version>1.1.0-SNAPSHOT</version>
+    </parent>
+
     <groupId>org.openecard.plugins</groupId>
     <artifactId>plugin-phr</artifactId>
     <packaging>pom</packaging>
@@ -15,87 +21,5 @@
 	<module>plugin-phr-wsdef</module>
 	<module>xmlsec-shade</module>
     </modules>
-
-	    <dependencyManagement>
-	<dependencies>
-	    <!-- logging -->
-	    <dependency>
-		<groupId>org.slf4j</groupId>
-		<artifactId>slf4j-api</artifactId>
-		<version>1.7.5</version>
-	    </dependency>
-	    <dependency>
-		<groupId>org.slf4j</groupId>
-		<artifactId>slf4j-ext</artifactId>
-		<version>1.7.5</version>
-	    </dependency>
-	    <dependency>
-		<groupId>org.slf4j</groupId>
-		<artifactId>slf4j-jdk14</artifactId>
-		<version>1.7.5</version>
-	    </dependency>
-	    <dependency>
-		<groupId>org.slf4j</groupId>
-		<artifactId>slf4j-android</artifactId>
-		<version>1.6.1-RC1</version>
-	    </dependency>
-	    <dependency>
-		<groupId>ch.qos.logback</groupId>
-		<artifactId>logback-classic</artifactId>
-		<version>1.0.12</version>
-	    </dependency>
-	    <!-- testing -->
-	    <dependency>
-		<groupId>org.testng</groupId>
-		<artifactId>testng</artifactId>
-		<version>6.8.1</version>
-	    </dependency>
-	    <dependency>
-		<groupId>com.google.code.findbugs</groupId>
-		<artifactId>annotations</artifactId>
-		<version>2.0.1</version>
-	    </dependency>
-	    <!-- maven -->
-	    <dependency>
-		<groupId>org.apache.maven</groupId>
-		<artifactId>maven-plugin-api</artifactId>
-		<version>3.0.5</version>
-	    </dependency>
-	    <!-- other third party libs -->
-	    <dependency>
-		<groupId>com.google.android</groupId>
-		<artifactId>android</artifactId>
-		<version>4.0.1.2</version>
-	    </dependency>
-	</dependencies>
-    </dependencyManagement>
-
-    <dependencies>
-	<dependency>
-	    <groupId>org.slf4j</groupId>
-	    <artifactId>slf4j-api</artifactId>
-	</dependency>
-	<dependency>
-	    <groupId>ch.qos.logback</groupId>
-	    <artifactId>logback-classic</artifactId>
-	    <scope>test</scope>
-	</dependency>
-	<dependency>
-	    <groupId>org.testng</groupId>
-	    <artifactId>testng</artifactId>
-	    <exclusions>
-		<exclusion>
-		    <artifactId>junit</artifactId>
-		    <groupId>junit</groupId>
-		</exclusion>
-	    </exclusions>
-	    <scope>test</scope>
-	</dependency>
-	<dependency>
-	    <groupId>com.google.code.findbugs</groupId>
-	    <artifactId>annotations</artifactId>
-	    <scope>provided</scope>
-	</dependency>
-    </dependencies>
 
 </project>

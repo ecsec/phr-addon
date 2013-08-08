@@ -37,7 +37,6 @@ import org.openecard.common.util.FileUtils;
  */
 public final class PHRPluginProperies {
 
-    private static final String PLUGIN_PROPERTIES_FILE = "phr_plugin.properties";
     private static final Properties props = new Properties();
 
     /**
@@ -49,8 +48,8 @@ public final class PHRPluginProperies {
     public static void loadProperties() throws IOException {
 	InputStream is = null;
 
-	File cfgDir = FileUtils.getHomeConfigDir();
-	String propFileStr = cfgDir + File.separator + PLUGIN_PROPERTIES_FILE;
+	String propFileStr = FileUtils.getHomeConfigDir().getAbsolutePath() + File.separatorChar + "plugins"
+		+ File.separatorChar + "PHR" + ".properties";
 	File propFile = new File(propFileStr);
 
 	if (! propFile.exists()) {

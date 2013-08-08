@@ -47,6 +47,7 @@ import java.security.cert.X509Certificate;
 import java.security.interfaces.RSAPublicKey;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.RSAPublicKeySpec;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.zip.GZIPInputStream;
@@ -140,7 +141,7 @@ public class PHRPluginAction implements AppPluginAction {
     private UserConsent gui;
     private CardStateMap map;
     private PHRMarshaller m;
-    Document assertion;
+    private Document assertion;
 
     @Override
     public void init(Context ctx) {
@@ -254,7 +255,18 @@ public class PHRPluginAction implements AppPluginAction {
 	    logger.error("No SAML assertion will be created.");
 	    return;
 	}
-	String providerURL = PHRPluginProperies.getProperty(ByteUtils.toHexString(efVerweis.p1.getProviderID(), false));
+	String[] urls = PHRPluginProperies.getProperty("provider-urls").split(";");
+	Map<String, String> mapping = new HashMap<String, String>();
+	for (String s : urls) {
+	    mapping.put(s.split(",")[0], s.split(",")[1]);
+	}
+
+	String providerURL = mapping.get(efVerweis.p1.getProviderID());
+	if (providerURL == null) {
+	    String msg = "No URL found for Provider ID " + efVerweis.p1.getProviderID();
+	    logger.error(msg);
+	    return;
+	}
 	String subjectCHCIOSIG = null;
 	X509Certificate softCert = loadSoftCert();
 	if (softCert == null) {
@@ -533,7 +545,14 @@ public class PHRPluginAction implements AppPluginAction {
 	// map providerID to server address
 	try {
 	    PHRPluginProperies.loadProperties();
-	    serverAddress = PHRPluginProperies.getProperty(providerID);
+	    String[] urls = PHRPluginProperies.getProperty("provider-urls").split(";");
+	    Map<String, String> mapping = new HashMap<String, String>();
+	    for (String s : urls) {
+		mapping.put(s.split(",")[0], s.split(",")[1]);
+	    }
+
+	    serverAddress = mapping.get(providerID);
+
 	    String property = PHRPluginProperies.getProperty("use-soft-ssl-auth-cert");
 	    if (property != null && property.equalsIgnoreCase("true")) {
 		useSoftSSLCert = true;

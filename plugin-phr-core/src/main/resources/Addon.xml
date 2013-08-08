@@ -4,15 +4,52 @@
   <Version>1.0</Version>
   <About/>
   <License/>
-  <LocalizedName xml:lang="DE">Plugin für die elektronische Patientenakte</LocalizedName>
-  <LocalizedDescription xml:lang="DE">Testbeschreibung</LocalizedDescription>
+  <LocalizedName xml:lang="DE">Elektronische Patientenakte</LocalizedName>
+  <LocalizedDescription xml:lang="DE">Stellt eine Schnittstelle für die gesicherte Kommunikation mit der elektronischen Patientenakte bereit.</LocalizedDescription>
+  <LocalizedName xml:lang="EN">Personal Health Record</LocalizedName>
+  <LocalizedDescription xml:lang="EN">Provides an interface for secure communication with the patient health record.</LocalizedDescription>
   <Logo/>
-  <ConfigDescription/>
+  <ConfigDescription>
+      <Entries>
+      <ScalarEntry>
+            <Key>use-soft-ssl-auth-cert</Key>
+            <Type>boolean</Type>
+            <LocalizedName xml:lang="DE">Software Zertifikat zur TLS authentisierung verwenden</LocalizedName>
+            <LocalizedDescription xml:lang="DE">Testbeschreibung</LocalizedDescription>
+      </ScalarEntry>
+            <ScalarEntry>
+            <Key>cert_alias</Key>
+            <Type>string</Type>
+            <LocalizedName xml:lang="DE">Zertifikats-Alias</LocalizedName>
+            <LocalizedDescription xml:lang="DE">Alias</LocalizedDescription>
+      </ScalarEntry>
+            <ScalarEntry>
+            <Key>cert_file</Key>
+            <Type>string</Type>
+            <LocalizedName xml:lang="DE">Zertifikats-Dateipfad</LocalizedName>
+            <LocalizedDescription xml:lang="DE">Dateiname</LocalizedDescription>
+      </ScalarEntry>
+            <ScalarEntry>
+            <Key>cert_pw</Key>
+            <Type>string</Type>
+            <LocalizedName xml:lang="DE">Zertifikats-Passwort</LocalizedName>
+            <LocalizedDescription xml:lang="DE">Passwort</LocalizedDescription>
+      </ScalarEntry>
+      <ScalarListEntry>
+            <Key>provider-urls</Key>
+            <Type>string</Type>
+            <LocalizedName xml:lang="DE">Zuordnung von Provider-ID auf Provider-URL</LocalizedName>
+            <LocalizedDescription xml:lang="DE">Testbeschreibung</LocalizedDescription>
+      </ScalarListEntry>
+    </Entries>
+  </ConfigDescription>
   <BindingActions>
     <AppPluginActionDescription>
       <ClassName>org.openecard.plugins.phrplugin.PHRPluginAction</ClassName>
       <LocalizedName xml:lang="DE">TODO</LocalizedName>
       <LocalizedDescription xml:lang="DE">TODO</LocalizedDescription>
+      <LocalizedName xml:lang="EN">TODO</LocalizedName>
+      <LocalizedDescription xml:lang="EN">TODO</LocalizedDescription>
       <ResourceName>phr-Client</ResourceName>
       <ConfigDescription/>
     </AppPluginActionDescription>

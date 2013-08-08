@@ -35,6 +35,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.UnknownHostException;
 import java.security.interfaces.RSAPublicKey;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -102,7 +104,13 @@ public class RLUSMessages {
 	po.getSystems().add(system1);
 	System system2 = new System();
 	cbrContext = new de.fraunhofer.isst.rlus.types.CBRContext();
-	String serverAddress = PHRPluginProperies.getProperty(providerId);
+	String[] urls = PHRPluginProperies.getProperty("provider-urls").split(";");
+	Map<String, String> mapping = new HashMap<String, String>();
+	for (String s : urls) {
+	    mapping.put(s.split(",")[0], s.split(",")[1]);
+	}
+
+	String serverAddress = mapping.get(providerId);
 
 	InetAddress ip = null;
 	try {

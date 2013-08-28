@@ -141,8 +141,6 @@ public class MDOSuperDeAndEncryptionTest {
 	instance = new TinySAL(env, states);
 	env.setSAL(instance);
 
-	instance.addProtocol(ECardConstants.Protocol.GENERIC_CRYPTO, new GenericCryptoProtocolFactory());
-	instance.addProtocol(ECardConstants.Protocol.PIN_COMPARE, new PINCompareProtocolFactory());
 	marshaller = WSMarshallerFactory.createInstance();
     }
 

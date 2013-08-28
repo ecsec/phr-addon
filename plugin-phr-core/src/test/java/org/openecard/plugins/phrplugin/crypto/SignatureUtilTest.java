@@ -168,8 +168,6 @@ public class SignatureUtilTest {
 	instance = new TinySAL(env, states);
 	env.setSAL(instance);
 
-	instance.addProtocol(ECardConstants.Protocol.GENERIC_CRYPTO, new GenericCryptoProtocolFactory());
-	instance.addProtocol(ECardConstants.Protocol.PIN_COMPARE, new PINCompareProtocolFactory());
 	org.openecard.plugins.phrplugin.CardUtils.authenticatePINHome(cHandle, dispatcher, states);
 	cHandle = CardUtils.connectToCardApplication(cHandle, ESIGN_CARD_APPLICATION, dispatcher);
     }

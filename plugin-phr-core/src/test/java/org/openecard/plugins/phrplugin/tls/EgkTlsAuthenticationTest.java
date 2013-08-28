@@ -135,9 +135,6 @@ public class EgkTlsAuthenticationTest {
 	instance = new TinySAL(env, states);
 	env.setSAL(instance);
 
-	instance.addProtocol(ECardConstants.Protocol.GENERIC_CRYPTO, new GenericCryptoProtocolFactory());
-	instance.addProtocol(ECardConstants.Protocol.PIN_COMPARE, new PINCompareProtocolFactory());
-
 	connectionHandleType = CardUtils.connectToCardApplication(connectionHandleType, cardApplication_ROOT, dispatcher);
 	boolean authStatus = CardUtils.authenticatePINHome(connectionHandleType, dispatcher, states);
 	Assert.assertTrue(authStatus);

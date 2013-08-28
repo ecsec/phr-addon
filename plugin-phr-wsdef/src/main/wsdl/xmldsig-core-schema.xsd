@@ -129,8 +129,8 @@
 	<!-- Start KeyInfo -->
 
 	<element name="KeyInfo" type="ds:KeyInfoType" />
-	<complexType name="KeyInfoType" mixed="true">
-		<choice maxOccurs="unbounded">
+	<complexType name="KeyInfoType">
+		<choice>
 			<element ref="ds:KeyName" />
 			<element ref="ds:KeyValue" />
 			<element ref="ds:RetrievalMethod" />
@@ -148,7 +148,7 @@
 	<element name="MgmtData" type="string" />
 
 	<element name="KeyValue" type="ds:KeyValueType" />
-	<complexType name="KeyValueType" mixed="true">
+	<complexType name="KeyValueType">
 		<choice>
 			<element ref="ds:DSAKeyValue" />
 			<element ref="ds:RSAKeyValue" />
@@ -169,7 +169,7 @@
 
 	<element name="X509Data" type="ds:X509DataType" />
 	<complexType name="X509DataType">
-		<sequence maxOccurs="unbounded">
+		<sequence>
 			<choice>
 				<element name="X509IssuerSerial" type="ds:X509IssuerSerialType" />
 				<element name="X509SKI" type="base64Binary" />

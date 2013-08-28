@@ -74,8 +74,7 @@ public class SoapUITest {
     @Test(enabled = true)
     public void testeIDClient() {
 	try {
-	    URL u = new URL(
-		    "http://localhost:24727/phr-Client?action=getInformationObject&semanticSignifier=MedicationSummary&output=xhtml");
+	    URL u = new URL("http://localhost:24727/phr-Client?action=getInformationObject&semanticSignifier=MedicationSummary&output=xhtml");
 	    String response = httpRequest(u, false);
 
 	    Assert.assertNotNull(response);

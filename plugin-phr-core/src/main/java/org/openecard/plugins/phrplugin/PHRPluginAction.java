@@ -80,12 +80,11 @@ import org.openecard.bouncycastle.util.encoders.Base64;
 import org.openecard.common.interfaces.Dispatcher;
 import org.openecard.common.interfaces.DispatcherException;
 import org.openecard.common.sal.state.CardStateMap;
+import org.openecard.common.sal.util.InsertCardDialog;
 import org.openecard.common.util.ByteUtils;
 import org.openecard.common.util.FileUtils;
 import org.openecard.common.util.Pair;
 import org.openecard.common.util.StringUtils;
-import org.openecard.control.binding.http.common.MimeType;
-import org.openecard.control.module.tctoken.gui.InsertCardDialog;
 import org.openecard.crypto.common.keystore.KeyStoreSigner;
 import org.openecard.crypto.common.sal.GenericCryptoSigner;
 import org.openecard.crypto.tls.ClientCertDefaultTlsClient;
@@ -136,6 +135,9 @@ public class PHRPluginAction implements AppPluginAction {
     private static final String KEYALGORITHM = "RSA";
     private static final String XSLT_STYLESHEET = "medplan2xhtml.xsl";
     private static final String XHTML = "xhtml";
+    private static final String TEXT_XML = "text/xml";
+    private static final String TEXT_HTML = "text/html";
+
     private Dispatcher dispatcher;
     private CardRecognition rec;
     private UserConsent gui;
@@ -234,7 +236,7 @@ public class PHRPluginAction implements AppPluginAction {
 	    logger.error(msg, e);
 	    return createInternalErrorResult(msg);
 	}
-	result.setBody(new Body(node, MimeType.TEXT_XML.toString()));
+	result.setBody(new Body(node, TEXT_XML));
 	return result;
     }
 
@@ -483,7 +485,7 @@ public class PHRPluginAction implements AppPluginAction {
 	} catch (TransformerException e) {
 	    return createInternalErrorResult("Converting response document to string failed.");
 	}
-	responseBodyMimeType = MimeType.TEXT_XML.getMimeType();
+	responseBodyMimeType = TEXT_XML;
 
 	if (output != null && output.equalsIgnoreCase(XHTML)) {
 	    String xhtml = transformToXHTML(responseDoc);
@@ -491,7 +493,7 @@ public class PHRPluginAction implements AppPluginAction {
 	    xhtml = xhtml.replace("<META http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">", "<META http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"/>");
 	    if (xhtml != null) {
 		responseBodyValue = xhtml.getBytes();
-		responseBodyMimeType = MimeType.TEXT_HTML.getMimeType();
+		responseBodyMimeType = TEXT_HTML;
 	    } else {
 		logger.error("Tranformation to XHTML failed; returning untransformed document.");
 	    }
@@ -634,7 +636,7 @@ public class PHRPluginAction implements AppPluginAction {
 	    }
 	    String docStr = new String(out.toByteArray(), "iso-8859-15");
 	    docStr = docStr.replace("ISO-8859-15", "UTF-8");
-	    body = new Body(m.str2doc(docStr), MimeType.TEXT_XML.getMimeType());
+	    body = new Body(m.str2doc(docStr), TEXT_XML);
 	} catch (IOException e) {
 	    String msg = "Unzipping of EF.PD failed.";
 	    logger.error(msg, e);

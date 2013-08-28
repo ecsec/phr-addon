@@ -25,17 +25,12 @@ package org.openecard.plugins.phrplugin;
 import iso.std.iso_iec._24727.tech.schema.EstablishContext;
 import java.io.InputStream;
 import org.openecard.addon.AddonManager;
-import org.openecard.addon.ClasspathRegistry;
 import org.openecard.addon.manifest.AddonSpecification;
 import org.openecard.common.ClientEnv;
-import org.openecard.common.ECardConstants;
 import org.openecard.common.sal.state.CardStateMap;
 import org.openecard.common.sal.state.SALStateCallback;
 import org.openecard.common.util.FileUtils;
-import org.openecard.control.ControlInterface;
 import org.openecard.control.binding.http.HTTPBinding;
-import org.openecard.control.binding.http.handler.common.DefaultHandler;
-import org.openecard.control.handler.ControlHandlers;
 import org.openecard.event.EventManager;
 import org.openecard.gui.swing.SwingDialogWrapper;
 import org.openecard.gui.swing.SwingUserConsent;
@@ -43,8 +38,6 @@ import org.openecard.ifd.scio.IFD;
 import org.openecard.management.TinyManagement;
 import org.openecard.recognition.CardRecognition;
 import org.openecard.sal.TinySAL;
-import org.openecard.sal.protocol.genericcryptography.GenericCryptoProtocolFactory;
-import org.openecard.sal.protocol.pincompare.PINCompareProtocolFactory;
 import org.openecard.transport.dispatcher.MessageDispatcher;
 import org.openecard.ws.marshal.WSMarshaller;
 import org.openecard.ws.marshal.WSMarshallerFactory;
@@ -115,26 +108,24 @@ public final class TestClient {
 	// Set up GUI
 	SwingUserConsent gui = new SwingUserConsent(new SwingDialogWrapper());
 	sal.setGUI(gui);
-	sal.addProtocol(ECardConstants.Protocol.GENERIC_CRYPTO, new GenericCryptoProtocolFactory());
-	sal.addProtocol(ECardConstants.Protocol.PIN_COMPARE, new PINCompareProtocolFactory());
 	ifd.setGUI(gui);
 
 	// Initialize the EventManager
 	em.initialize();
 
+	HTTPBinding binding = new HTTPBinding(HTTPBinding.DEFAULT_PORT);
+
+	AddonManager am = new AddonManager(dispatcher, gui, cardStates, recognition, em);
+
 	WSMarshaller marshaller = WSMarshallerFactory.createInstance();
 	marshaller.addXmlTypeClass(AddonSpecification.class);
-	InputStream manifestStream = FileUtils.resolveResourceAsStream(PHRPluginAction.class, "PHRPlugin-Manifest.xml");
+	InputStream manifestStream = FileUtils.resolveResourceAsStream(PHRPluginAction.class, "META-INF/Addon.xml");
 	Document manifestDoc = marshaller.str2doc(manifestStream);
-	ClasspathRegistry.getInstance().register((AddonSpecification) marshaller.unmarshal(manifestDoc));
+	am.registerClasspathAddon((AddonSpecification) marshaller.unmarshal(manifestDoc));
 
-	HTTPBinding binding = new HTTPBinding(HTTPBinding.DEFAULT_PORT);
-	binding.setAddonManager(AddonManager.createInstance(dispatcher, gui, cardStates, recognition, em, sal.getProtocolInfo()));
-	ControlHandlers handler = new ControlHandlers();
-
-	handler.addControlHandler(new DefaultHandler());
-	ControlInterface control = new ControlInterface(binding, handler);
-	control.start();
+	binding.setAddonManager(am);
+	sal.setAddonManager(am);
+	binding.start();
     }
 
 }

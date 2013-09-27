@@ -7,7 +7,7 @@
     <parent>
 	<groupId>org.openecard</groupId>
 	<artifactId>app</artifactId>
-	<version>1.1.0-SNAPSHOT</version>
+	<version>1.1.0-pre1</version>
     </parent>
 
     <groupId>org.openecard.plugins</groupId>
@@ -15,6 +15,21 @@
     <packaging>pom</packaging>
     <version>0.9.0-SNAPSHOT</version>
     <name>PHR Plugin</name>
+
+    <repositories>
+	<repository>
+	    <id>openecard-repos</id>
+	    <name>Openecard Repos</name>
+	    <url>http://mvn.vserver-001.urospace.de/content/groups/openecard-public</url>
+	</repository>
+    </repositories>
+
+    <pluginRepositories>
+	<pluginRepository>
+	    <id>openecard-repos</id>
+	    <url>http://mvn.vserver-001.urospace.de/content/groups/openecard-public</url>
+	</pluginRepository>
+    </pluginRepositories>
 
     <modules>
 	<module>plugin-phr-core</module>

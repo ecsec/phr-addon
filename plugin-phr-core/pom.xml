@@ -15,6 +15,10 @@
     <packaging>jar</packaging>
     <name>Patient Health Record Plugin</name>
 
+	<properties>
+		<openecard.version>1.1.0-pre1</openecard.version>
+	</properties>
+
     <build>
 	<plugins>
 	    <plugin>
@@ -104,32 +108,32 @@
 	    <groupId>org.openecard</groupId>
 	    <artifactId>addon</artifactId>
 	    <scope>provided</scope>
-	    <version>1.1.0-SNAPSHOT</version>
+	    <version>${openecard.version}</version>
 	</dependency>
 	<dependency>
 	    <groupId>org.openecard.wsdef</groupId>
 	    <artifactId>wsdef-client</artifactId>
 	    <scope>provided</scope>
-	    <version>1.1.0-SNAPSHOT</version>
+	    <version>${openecard.version}</version>
 	</dependency>
 	<dependency>
 	    <groupId>org.openecard.transport</groupId>
 	    <artifactId>http-core</artifactId>
 	    <scope>provided</scope>
-	    <version>1.1.0-SNAPSHOT</version>
+	    <version>${openecard.version}</version>
 	</dependency>
 	<dependency>
 	    <groupId>org.openecard.crypto</groupId>
 	    <artifactId>tls</artifactId>
 	    <scope>provided</scope>
-	    <version>1.1.0-SNAPSHOT</version>
+	    <version>${openecard.version}</version>
 	</dependency>
 	<!-- deprecated (InsertCardDialog will be moved to common) -->
 	<dependency>
 	    <groupId>org.openecard.sal</groupId>
 	    <artifactId>sal-common</artifactId>
 	    <scope>provided</scope>
-	    <version>1.1.0-SNAPSHOT</version>
+	    <version>${openecard.version}</version>
 	</dependency>
 
 	<!-- Test dependencies -->
@@ -137,66 +141,66 @@
 	    <groupId>org.openecard.ifd</groupId>
 	    <artifactId>ifd-core</artifactId>
 	    <scope>test</scope>
-	    <version>1.1.0-SNAPSHOT</version>
+	    <version>${openecard.version}</version>
 	</dependency>
 	<dependency>
 	    <groupId>org.openecard.wsdef</groupId>
 	    <artifactId>jaxb-marshaller</artifactId>
-	    <version>1.1.0-SNAPSHOT</version>
+	    <version>${openecard.version}</version>
 	    <scope>test</scope>
 	</dependency>
 	<dependency>
 	    <groupId>org.openecard.sal</groupId>
 	    <artifactId>tiny-sal</artifactId>
-	    <version>1.1.0-SNAPSHOT</version>
+	    <version>${openecard.version}</version>
 	    <scope>test</scope>
 	</dependency>
 	<dependency>
 	    <groupId>org.openecard.transport</groupId>
 	    <artifactId>dispatcher</artifactId>
-	    <version>1.1.0-SNAPSHOT</version>
+	    <version>${openecard.version}</version>
 	    <scope>test</scope>
 	</dependency>
 	<dependency>
 	    <groupId>org.openecard.ifd.scio-backend</groupId>
 	    <artifactId>pcsc</artifactId>
-	    <version>1.1.0-SNAPSHOT</version>
+	    <version>${openecard.version}</version>
 	    <scope>test</scope>
 	</dependency>
 	<dependency>
 	    <groupId>org.openecard.gui</groupId>
 	    <artifactId>swing</artifactId>
-	    <version>1.1.0-SNAPSHOT</version>
+	    <version>${openecard.version}</version>
 	    <scope>test</scope>
 	</dependency>
 	<dependency>
-	    <groupId>org.openecard.sal.protocols</groupId>
+	    <groupId>org.openecard.addons</groupId>
 	    <artifactId>genericcryptography</artifactId>
-	    <version>1.1.0-SNAPSHOT</version>
+	    <version>${openecard.version}</version>
 	    <scope>test</scope>
 	</dependency>
 	<dependency>
 	    <groupId>org.openecard.management</groupId>
 	    <artifactId>tiny-management</artifactId>
-	    <version>1.1.0-SNAPSHOT</version>
+	    <version>${openecard.version}</version>
 	    <scope>test</scope>
 	</dependency>
 	<dependency>
 	    <groupId>org.openecard</groupId>
 	    <artifactId>event-manager</artifactId>
-	    <version>1.1.0-SNAPSHOT</version>
+	    <version>${openecard.version}</version>
 	    <scope>test</scope>
 	</dependency>
 	<dependency>
-	    <groupId>org.openecard.sal.protocols</groupId>
-	    <artifactId>pincompare</artifactId>
-	    <version>1.1.0-SNAPSHOT</version>
+	    <groupId>org.openecard.addons</groupId>
+	    <artifactId>pin-management</artifactId>
+	    <version>${openecard.version}</version>
 	    <scope>test</scope>
 	</dependency>
 	<dependency>
 	    <groupId>org.openecard.bindings</groupId>
 	    <artifactId>http</artifactId>
-	    <version>1.1.0-SNAPSHOT</version>
+	    <version>${openecard.version}</version>
 	    <scope>test</scope>
 	</dependency>
     </dependencies>

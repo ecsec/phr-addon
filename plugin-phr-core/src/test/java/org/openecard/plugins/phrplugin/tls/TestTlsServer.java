@@ -90,7 +90,8 @@ public class TestTlsServer extends DefaultTlsServer {
 
     @Override
     public CertificateRequest getCertificateRequest() {
-	return new CertificateRequest(new short[] { ClientCertificateType.rsa_sign }, null);
+	// TODO: BC introduces supportedSignatures field. Check if it is ok to use null.
+	return new CertificateRequest(new short[] { ClientCertificateType.rsa_sign }, null, null);
     }
 
     @Override

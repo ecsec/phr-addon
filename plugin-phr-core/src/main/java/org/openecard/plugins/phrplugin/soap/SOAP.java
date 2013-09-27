@@ -51,13 +51,13 @@ import org.openecard.apache.http.protocol.BasicHttpContext;
 import org.openecard.apache.http.protocol.HttpContext;
 import org.openecard.apache.http.protocol.HttpRequestExecutor;
 import org.openecard.bouncycastle.crypto.tls.ProtocolVersion;
-import org.openecard.bouncycastle.crypto.tls.TlsClient;
 import org.openecard.bouncycastle.crypto.tls.TlsClientProtocol;
 import org.openecard.common.WSHelper;
 import org.openecard.common.WSHelper.WSException;
 import org.openecard.common.interfaces.Dispatcher;
 import org.openecard.common.interfaces.DispatcherException;
 import org.openecard.common.util.FileUtils;
+import org.openecard.crypto.tls.ClientCertTlsClient;
 import org.openecard.crypto.tls.proxy.ProxySettings;
 import org.openecard.plugins.phrplugin.PHRPluginProperies;
 import org.openecard.plugins.phrplugin.RLUSMessages;
@@ -91,7 +91,7 @@ public class SOAP {
 
     private final WSMarshaller m;
     private final URL endpoint;
-    private final TlsClient tlsClient;
+    private final ClientCertTlsClient tlsClient;
 
     /**
      * Creates a PAOS instance and configures it for a given endpoint.
@@ -104,7 +104,7 @@ public class SOAP {
      * @param marshaller WSMarshaller to use for message (un-)marshalling
      * @throws SOAPException In case the PAOS module could not be initialized.
      */
-    public SOAP(URL endpoint, Dispatcher dispatcher, TlsClient tlsClient, WSMarshaller marshaller) 
+    public SOAP(URL endpoint, Dispatcher dispatcher, ClientCertTlsClient tlsClient, WSMarshaller marshaller)
 	    throws SOAPException {
 	this.endpoint = endpoint;
 	this.tlsClient = tlsClient;
@@ -169,8 +169,8 @@ public class SOAP {
      */
     private void signDocument(Document document) {
 	// TODO replace with hardware key
-	java.security.cert.Certificate[] softCert = null;
-	PrivateKey myPrivateKey = null;
+	java.security.cert.Certificate[] softCert;
+	PrivateKey myPrivateKey;
 	try {
 	    KeyStore keyStore = KeyStore.getInstance("PKCS12");
 	    PHRPluginProperies.loadProperties();

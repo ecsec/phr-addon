@@ -69,8 +69,6 @@ import org.openecard.gui.swing.SwingUserConsent;
 import org.openecard.ifd.scio.IFD;
 import org.openecard.recognition.CardRecognition;
 import org.openecard.sal.TinySAL;
-import org.openecard.sal.protocol.genericcryptography.GenericCryptoProtocolFactory;
-import org.openecard.sal.protocol.pincompare.PINCompareProtocolFactory;
 import org.openecard.transport.dispatcher.MessageDispatcher;
 import org.openecard.ws.marshal.WSMarshaller;
 import org.openecard.ws.marshal.WSMarshallerFactory;
@@ -160,7 +158,7 @@ public class MDOSuperDeAndEncryptionTest {
 	// of the record
 	X509Certificate certEGK = cardCrypto.getENCCertificateFromEGK(states);
 	Document encPrivateKeyRecordEGK = enc.encryptPrivateKeyRecord(keyPairRecord.getPrivate(),
-		certEGK.getPublicKey(), MDOCrypto.getSubjectKeyIdentifier((X509Certificate) certEGK));
+		certEGK.getPublicKey(), MDOCrypto.getSubjectKeyIdentifier(certEGK));
 
 	// Create the, with the publicKey of the record hybrid-encrypted, MDO
 	InputStream mdoStream = FileUtils.resolveResourceAsStream(MDOSuperDeAndEncryptionTest.class, ORIGINAL_MDO);

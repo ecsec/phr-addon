@@ -24,15 +24,14 @@ package org.openecard.plugins.phrplugin;
 
 import iso.std.iso_iec._24727.tech.schema.CardApplicationConnect;
 import iso.std.iso_iec._24727.tech.schema.CardApplicationConnectResponse;
-import iso.std.iso_iec._24727.tech.schema.CardApplicationPath;
-import iso.std.iso_iec._24727.tech.schema.CardApplicationPathResponse;
-import iso.std.iso_iec._24727.tech.schema.CardApplicationPathResponse.CardAppPathResultSet;
 import iso.std.iso_iec._24727.tech.schema.CardApplicationPathType;
 import iso.std.iso_iec._24727.tech.schema.ConnectionHandleType;
 import iso.std.iso_iec._24727.tech.schema.DIDAuthenticate;
 import iso.std.iso_iec._24727.tech.schema.DIDAuthenticateResponse;
 import iso.std.iso_iec._24727.tech.schema.DSIRead;
 import iso.std.iso_iec._24727.tech.schema.DSIReadResponse;
+import iso.std.iso_iec._24727.tech.schema.DataSetSelect;
+import iso.std.iso_iec._24727.tech.schema.DataSetSelectResponse;
 import iso.std.iso_iec._24727.tech.schema.PinCompareDIDAuthenticateInputType;
 import java.lang.reflect.InvocationTargetException;
 import org.openecard.common.ECardConstants;
@@ -77,20 +76,15 @@ public class CardUtils {
 	    byte[] applicationIdentifier, Dispatcher dispatcher) {
 	ConnectionHandleType handle = null;
 	try {
-	    // Perform a CardApplicationPath and CardApplicationConnect to connect to the card application
-	    CardApplicationPath cardApplicationPath = new CardApplicationPath();
-	    cHandle.setCardApplication(applicationIdentifier);
-	    cardApplicationPath.setCardAppPathRequest(cHandle);
-	    CardApplicationPathResponse cardApplicationPathResponse = 
-		    (CardApplicationPathResponse) dispatcher.deliver(cardApplicationPath);
-
-	    // Check CardApplicationPathResponse
-	    WSHelper.checkResult(cardApplicationPathResponse);
+	    CardApplicationPathType reqPath = new CardApplicationPathType();
+	    reqPath.setCardApplication(applicationIdentifier);
+	    reqPath.setChannelHandle(cHandle.getChannelHandle());
+	    reqPath.setContextHandle(cHandle.getContextHandle());
+	    reqPath.setIFDName(cHandle.getIFDName());
+	    reqPath.setSlotIndex(cHandle.getSlotIndex());
 
 	    CardApplicationConnect cardApplicationConnect = new CardApplicationConnect();
-	    CardAppPathResultSet cardAppPathResultSet = cardApplicationPathResponse.getCardAppPathResultSet();
-	    CardApplicationPathType cardAppPath = cardAppPathResultSet.getCardApplicationPathResult().get(0);
-	    cardApplicationConnect.setCardApplicationPath(cardAppPath);
+	    cardApplicationConnect.setCardApplicationPath(reqPath);
 	    CardApplicationConnectResponse cardApplicationConnectResponse = 
 		    (CardApplicationConnectResponse) dispatcher.deliver(cardApplicationConnect);
 
@@ -168,7 +162,10 @@ public class CardUtils {
 		logger.error(msg);
 		return null;
 	    }
+
 	    cHandle = CardUtils.connectToCardApplication(cHandle, cardApplication, dispatcher);
+	    datasetSelect(cHandle, dsiName, dispatcher);
+
 	    DSIRead dsiRead = new DSIRead();
 	    dsiRead.setConnectionHandle(cHandle);
 	    dsiRead.getConnectionHandle().setCardApplication(cardApplication);
@@ -184,6 +181,15 @@ public class CardUtils {
 	    logger.error(e.getMessage(), e);
 	}
 	return new Pair<byte[], ConnectionHandleType>(content, cHandle);
+    }
+
+    private static void datasetSelect(ConnectionHandleType cHandle, String datasetName, Dispatcher dispatcher)
+	    throws WSException, DispatcherException, InvocationTargetException {
+	DataSetSelect req = new DataSetSelect();
+	req.setConnectionHandle(cHandle);
+	req.setDataSetName(datasetName);
+	DataSetSelectResponse res = (DataSetSelectResponse) dispatcher.deliver(req);
+	WSHelper.checkResult(res);
     }
 
     /**

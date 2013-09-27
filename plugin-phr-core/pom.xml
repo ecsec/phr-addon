@@ -16,7 +16,7 @@
     <name>Patient Health Record Plugin</name>
 
 	<properties>
-		<openecard.version>1.1.0-pre1</openecard.version>
+		<openecard.version>1.1.0-SNAPSHOT</openecard.version>
 	</properties>
 
     <build>

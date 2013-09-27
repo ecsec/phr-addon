@@ -117,7 +117,10 @@ public class CardCrypto {
 	try { 
 	    // Connect to eSign application
 	    cHandle = CardUtils.connectToCardApplication(cHandle, CARD_APP_ESIGN, dispatcher);
-	    // read the raw certificate bytes
+
+
+	    CardUtils.datasetSelect(cHandle, EF_C_CH_ENC, dispatcher);
+
 	    DSIRead dsiRead = new DSIRead();
 	    dsiRead.setConnectionHandle(cHandle);
 	    dsiRead.getConnectionHandle().setCardApplication(CARD_APP_ESIGN);

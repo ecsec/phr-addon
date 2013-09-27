@@ -82,6 +82,8 @@ public class CardCrypto {
 	    CardUtils.authenticatePINHome(cHandle, dispatcher, cardStates);
 	    cHandle = CardUtils.connectToCardApplication(cHandle, CARD_APP_ESIGN, dispatcher);
 
+	    CardUtils.datasetSelect(cHandle, EF_C_CH_ENC, dispatcher);
+
 	    // read the certificate
 	    DSIRead dsiRead = new DSIRead();
 	    dsiRead.setConnectionHandle(cHandle);

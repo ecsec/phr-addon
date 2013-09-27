@@ -183,7 +183,7 @@ public class CardUtils {
 	return new Pair<byte[], ConnectionHandleType>(content, cHandle);
     }
 
-    private static void datasetSelect(ConnectionHandleType cHandle, String datasetName, Dispatcher dispatcher)
+    public static void datasetSelect(ConnectionHandleType cHandle, String datasetName, Dispatcher dispatcher)
 	    throws WSException, DispatcherException, InvocationTargetException {
 	DataSetSelect req = new DataSetSelect();
 	req.setConnectionHandle(cHandle);
